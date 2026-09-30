@@ -1,0 +1,35 @@
+﻿---
+import '../styles/prose.css';
+import BaseLayout from './BaseLayout.astro';
+
+// Layout para páginas Markdown en src/pages/legal/.
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <div class="container narrow">
+    <header class="page-header">
+      <p class="label">Legal</p>
+      <h1>{frontmatter.title}</h1>
+      <p>Última actualización: {frontmatter.updated}</p>
+    </header>
+    <aside class="review-note">
+      <strong>[REVISAR]</strong> Texto base orientativo para un sitio personal en España. No es asesoramiento
+      jurídico: revísalo y completa los datos marcados como [PENDIENTE] antes de publicar.
+    </aside>
+    <div class="prose">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .review-note {
+    margin-bottom: 2rem;
+    padding: 0.9rem 1.1rem;
+    border-left: 4px solid #d97706;
+    background: color-mix(in srgb, #d97706 10%, transparent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: var(--step--1);
+  }
+</style>

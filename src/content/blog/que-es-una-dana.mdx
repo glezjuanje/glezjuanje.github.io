@@ -1,0 +1,37 @@
+---
+title: '[EJEMPLO] Qué es una DANA y por qué es tan difícil de predecir'
+date: 2026-09-10
+description: 'Una depresión aislada en niveles altos es una bolsa de aire frío que se separa de la circulación general. Te explico cómo se forma y por qué complica el pronóstico.'
+category: Actualidad meteo
+tags: [DANA, predicción, dinámica atmosférica, precipitación]
+draft: false
+---
+
+import Figure from '../../components/Figure.astro';
+import dana from '../../assets/blog/dana-esquema.svg';
+
+> Artículo de ejemplo para comprobar el diseño. Los artículos de actualidad sobre episodios concretos deberían enlazar siempre a los avisos oficiales de AEMET.
+
+**DANA** son las siglas de *depresión aislada en niveles altos*. Es una bolsa de aire frío en la troposfera media y alta, a unos 5–6 km de altura en el nivel de 500 hPa, que se ha desprendido de la corriente en chorro y circula por su cuenta.
+
+En condiciones normales, el aire en altura se mueve de oeste a este siguiendo las ondulaciones del chorro polar. A veces una de esas ondulaciones se hace tan profunda que se estrangula y deja atrás un remolino cerrado de aire frío. Ese remolino es la DANA.
+
+En latitudes medias, fuera de los niveles cercanos al suelo, el viento sopla casi paralelo a las isohipsas (líneas de igual altura geopotencial $Z$). Es el **viento geostrófico**:
+
+$$
+u_g = -\frac{g}{f}\frac{\partial Z}{\partial y}, \qquad v_g = \frac{g}{f}\frac{\partial Z}{\partial x}, \qquad f = 2\Omega\sin\varphi
+$$
+
+donde $g$ es la gravedad, $f$ el parámetro de Coriolis, $\Omega$ la velocidad angular de la Tierra y $\varphi$ la latitud. Por eso, en el esquema, las isohipsas cerradas en torno a la DANA indican una circulación ciclónica aislada.
+
+<Figure src={dana} alt="Esquema: arriba, líneas onduladas del chorro polar; debajo, un conjunto de elipses concéntricas marcadas con una B que representan la DANA separada del chorro." wide>Esquema idealizado de una DANA en 500 hPa: el aire frío queda aislado al sur de la corriente en chorro. No representa ninguna situación real.</Figure>
+
+¿Por qué es tan difícil de predecir? Al estar desconectada del flujo general, su desplazamiento es lento y a veces errático. Pequeñas diferencias en su posición pueden cambiar mucho dónde se producen las lluvias más intensas.
+
+Además, el aire frío en altura aumenta la inestabilidad cuando hay aire cálido y húmedo cerca de la superficie. En otoño, con el Mediterráneo todavía caliente, esa combinación puede favorecer tormentas organizadas y precipitaciones torrenciales.
+
+## Qué mirar en un pronóstico
+
+- El mapa de altura geopotencial y temperatura en 500 hPa, para localizar el núcleo frío.
+- La dispersión entre los miembros de un sistema de predicción por conjuntos: si es grande, la incertidumbre también lo es.
+- Los avisos oficiales de AEMET, que son la referencia en situaciones de riesgo.

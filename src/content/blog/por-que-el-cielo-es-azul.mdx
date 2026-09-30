@@ -1,0 +1,40 @@
+---
+title: '[EJEMPLO] Por qué el cielo es azul (y los atardeceres, rojos)'
+date: 2026-09-24
+description: 'La dispersión de Rayleigh explica el azul del cielo con una sola ley: la luz de onda corta se dispersa mucho más que la de onda larga.'
+category: Divulgación
+tags: [óptica atmosférica, radiación, física de la atmósfera]
+cover: ../../assets/blog/cielo-azul-portada.jpg
+coverAlt: 'Degradado de cielo azul intenso que se aclara hacia un horizonte anaranjado.'
+draft: false
+---
+
+import Figure from '../../components/Figure.astro';
+import rayleigh from '../../assets/blog/rayleigh-dispersion.svg';
+
+> Artículo de ejemplo para comprobar el diseño: tipografía, figura con pie, fórmula y hueco de anuncio.
+
+La luz del Sol nos llega casi blanca: es una mezcla de todas las longitudes de onda visibles, del violeta al rojo. Sin embargo, al atravesar la atmósfera, una parte de esa luz cambia de dirección al chocar con las moléculas de nitrógeno y oxígeno. A ese proceso lo llamamos **dispersión**.
+
+Cuando las partículas que dispersan son mucho más pequeñas que la longitud de onda de la luz, como les ocurre a las moléculas del aire, se cumple la ley de Rayleigh. La intensidad dispersada depende muy fuertemente de la longitud de onda $\lambda$:
+
+$$
+I(\lambda) \propto \frac{1}{\lambda^{4}}
+$$
+
+Esa cuarta potencia es la clave. Si comparamos el azul ($\lambda \approx 450\ \text{nm}$) con el rojo ($\lambda \approx 700\ \text{nm}$), el azul se dispersa unas $(700/450)^4 \approx 5{,}9$ veces más.
+
+La consecuencia es que, miremos hacia donde miremos, nos llega luz azul dispersada desde todas las direcciones del cielo. El violeta se dispersa todavía más, pero el Sol emite menos en esa zona del espectro y nuestros ojos son menos sensibles a él.
+
+<Figure src={rayleigh} alt="Curva que crece rápidamente hacia las longitudes de onda cortas: a 400 nm la dispersión es casi 10 veces mayor que a 700 nm." credit="Elaboración propia a partir de la ley de Rayleigh.">Intensidad de la dispersión de Rayleigh en el espectro visible, relativa al valor a 700 nm. La curva sigue la relación $I \propto \lambda^{-4}$.</Figure>
+
+Al amanecer y al atardecer, la luz solar recorre un camino mucho más largo dentro de la atmósfera. Por el camino pierde casi todo el azul, que se dispersa hacia otros lados, y lo que llega directamente a nuestros ojos es sobre todo naranja y rojo.
+
+Las nubes, en cambio, son blancas o grises. Sus gotitas son mucho mayores que la longitud de onda de la luz y dispersan todos los colores casi por igual: es la llamada dispersión de Mie.
+
+## Para saber más
+
+| Tipo de dispersión | Tamaño de la partícula | Dependencia con $\lambda$ | Ejemplo |
+| --- | --- | --- | --- |
+| Rayleigh | Mucho menor que $\lambda$ | $\lambda^{-4}$ | Moléculas de aire: cielo azul |
+| Mie | Comparable a $\lambda$ o mayor | Débil | Gotas de nube: nubes blancas |

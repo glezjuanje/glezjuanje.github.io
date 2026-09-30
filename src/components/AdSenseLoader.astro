@@ -1,0 +1,14 @@
+---
+/**
+ * Script global de AdSense. Solo se emite en producción y con ID de editor
+ * configurado; mientras tanto el sitio no carga ningún script de terceros.
+ *
+ * [REVISAR] En el EEE, antes de activar AdSense necesitas una CMP certificada
+ * por Google (p. ej. la de "Privacidad y mensajes" de AdSense) y actualizar la
+ * política de cookies.
+ */
+import { ADS, adsEnabled } from '../config/site';
+const src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS.client}`;
+---
+
+{adsEnabled && <script is:inline async src={src} crossorigin="anonymous" />}

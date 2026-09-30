@@ -1,0 +1,44 @@
+﻿---
+import '../styles/prose.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, SOCIAL } from '../config/site';
+---
+
+<BaseLayout title="Contacto" description="Cómo ponerte en contacto conmigo.">
+  <div class="container narrow">
+    <header class="page-header">
+      <p class="label">Correo y redes</p>
+      <h1>Contacto</h1>
+      <p class="pending">[PENDIENTE: para qué te pueden escribir: colaboraciones, medios, charlas…]</p>
+    </header>
+
+    <div class="prose">
+      <p>
+        La forma más directa es el correo electrónico:
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </p>
+      <p class="pending">[PENDIENTE] Si quieres, indica aquí tiempos de respuesta o temas que no atiendes.</p>
+      <h2>Redes</h2>
+      <ul>
+        {
+          SOCIAL.map((s) => (
+            <li>
+              {s.url ? (
+                <a href={s.url} rel="me noopener" target="_blank">
+                  {s.name}
+                </a>
+              ) : (
+                s.name
+              )}
+              : {s.handle}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="muted">
+        Esta web no usa formularios: tus datos solo me llegan si decides escribirme. Más información en la
+        <a href="/legal/privacidad/">política de privacidad</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import BlogListing from '../../../../components/BlogListing.astro';
+import { SITE } from '../../../../config/site';
+import { allTags, getPosts, slugify } from '../../../../utils/posts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPosts();
+  return allTags(posts).flatMap((tag) =>
+    paginate(
+      posts.filter((p) => p.data.tags.some((t) => slugify(t) === tag.slug)),
+      { params: { tag: tag.slug }, props: { tag }, pageSize: SITE.postsPerPage },
+    ),
+  );
+}) satisfies GetStaticPaths;
+
+const { page, tag } = Astro.props;
+---
+
+<BaseLayout title={`#${tag.name} · Blog`} description={`Artículos con la etiqueta «${tag.name}».`}>
+  <BlogListing page={page} kicker="Etiqueta" heading={tag.name} intro={`Artículos con la etiqueta «${tag.name}».`} activeTag={tag.slug} />
+</BaseLayout>

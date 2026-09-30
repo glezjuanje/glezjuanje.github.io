@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostRow from '../components/PostRow.astro';
+import { getPostNumbers, getPosts } from '../utils/posts';
+
+const latest = (await getPosts()).slice(0, 3);
+const numbers = await getPostNumbers();
+---
+
+<BaseLayout title="Página no encontrada" description="La página que buscas no existe." noindex>
+  <div class="container narrow">
+    <header class="page-header">
+      <p class="label">Error 404 · sin datos</p>
+      <h1>Página no encontrada</h1>
+      <p>La dirección no existe o ha cambiado.</p>
+      <p class="links mono"><a href="/">Portada</a> · <a href="/blog/">Archivo del blog</a></p>
+    </header>
+    <h2 class="label sub">Últimas entradas</h2>
+    <ol class="log">
+      {latest.map((post) => <PostRow post={post} number={numbers.get(post.id)} showDescription={false} headingLevel="h3" />)}
+    </ol>
+  </div>
+</BaseLayout>
+
+<style>
+  .links {
+    font-style: normal;
+    font-size: var(--step--1);
+  }
+  .sub {
+    color: var(--text);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+    margin: 1rem 0 0;
+  }
+  .log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>

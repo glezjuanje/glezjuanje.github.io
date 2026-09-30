@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogListing from '../../components/BlogListing.astro';
+import { SITE } from '../../config/site';
+import { getPosts } from '../../utils/posts';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return paginate(await getPosts(), { pageSize: SITE.postsPerPage });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const title = page.currentPage > 1 ? `Blog · página ${page.currentPage}` : 'Blog';
+---
+
+<BaseLayout title={title} description="Artículos sobre actualidad meteorológica, clima y divulgación científica.">
+  <BlogListing page={page} heading="Blog" intro="Todas las entradas, de la más reciente a la más antigua." />
+</BaseLayout>

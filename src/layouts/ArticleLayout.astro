@@ -1,0 +1,235 @@
+---
+import 'katex/dist/katex.min.css';
+import '../styles/prose.css';
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import AdSlot from '../components/AdSlot.astro';
+import FrontGlyph from '../components/FrontGlyph.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
+import { SITE } from '../config/site';
+import { categoryUrl, formatDate, formatShortDate, getPostNumbers, readingMinutes, tagUrl, type Post } from '../utils/posts';
+
+export interface Props {
+  post: Post;
+  related: Post[];
+}
+
+const { post, related } = Astro.props;
+const { title, description, date, updated, category, tags, cover, coverAlt, draft } = post.data;
+const { Content } = await render(post);
+const minutes = readingMinutes(post.body);
+const isMarkdown = post.filePath?.endsWith('.md') ?? false;
+const numbers = await getPostNumbers();
+const number = numbers.get(post.id);
+
+// Open Graph: portada en JPG 1200 px si existe; si no, la imagen por defecto.
+const ogImage = cover ? (await getImage({ src: cover, width: 1200, format: 'jpg' })).src : undefined;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  type="article"
+  image={ogImage}
+  imageAlt={coverAlt}
+  publishedTime={date}
+  modifiedTime={updated}
+  tags={tags}
+  section={category}
+>
+  <article class="container article">
+    <header class="article-header">
+      <dl class="sheet mono">
+        <div>
+          <dt>Nº</dt>
+          <dd class="num">{draft ? 'borrador' : number}</dd>
+        </div>
+        <div>
+          <dt>Fecha</dt>
+          <dd><time datetime={date.toISOString()} title={formatDate(date)}>{formatShortDate(date)}</time></dd>
+        </div>
+        <div class="grow">
+          <dt>Categoría</dt>
+          <dd>
+            <a href={categoryUrl(category)}><FrontGlyph category={category} width={24} /> {category}</a>
+          </dd>
+        </div>
+        <div>
+          <dt>Lectura</dt>
+          <dd>{minutes} min</dd>
+        </div>
+      </dl>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <p class="byline mono">
+        Por {SITE.author}
+        {
+          updated && (
+            <>
+              {' · '}revisado el <time datetime={updated.toISOString()}>{formatShortDate(updated)}</time>
+            </>
+          )
+        }
+        {draft && <strong class="draft"> · borrador, no se publicará</strong>}
+      </p>
+    </header>
+
+    {
+      cover && (
+        <Image
+          class="cover"
+          src={cover}
+          alt={coverAlt ?? ''}
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 1100px) 1000px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      )
+    }
+
+    <div class="prose">
+      <Content components={{ AdSlot }} />
+    </div>
+    {
+      isMarkdown && (
+        <>
+          {/* Artículos .md: el plugin deja un <div data-ad-anchor>; aquí se sustituye por el anuncio. */}
+          <template id="ad-in-article">
+            <AdSlot variant="in-article" />
+          </template>
+          <script is:inline>
+            (() => {
+              const anchor = document.querySelector('[data-ad-anchor]');
+              const tpl = document.getElementById('ad-in-article');
+              if (anchor && tpl) anchor.replaceWith(tpl.content.cloneNode(true));
+            })();
+          </script>
+        </>
+      )
+    }
+
+    <footer class="article-footer">
+      {
+        tags.length > 0 && (
+          <p class="tags mono">
+            <span class="label">Etiquetas</span>{' '}
+            {tags.map((t, i) => (
+              <>
+                <a href={tagUrl(t)}>{t}</a>
+                {i < tags.length - 1 && ', '}
+              </>
+            ))}
+          </p>
+        )
+      }
+      <p class="end label" aria-hidden="true">— fin —</p>
+      <AdSlot variant="end" />
+      <RelatedPosts posts={related} numbers={numbers} />
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    max-width: calc(var(--measure) + 4rem);
+  }
+  .article-header {
+    padding-block: clamp(2rem, 5vw, 3rem) 1.5rem;
+  }
+  .sheet {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 2rem;
+    border-top: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .sheet > div {
+    padding: 0.45rem 1rem 0.5rem 0;
+    margin-right: 1rem;
+    border-right: 1px solid var(--border);
+  }
+  .sheet > div:last-child {
+    border-right: 0;
+    margin-right: 0;
+  }
+  .sheet .grow {
+    flex: 1;
+  }
+  .sheet dt {
+    font-size: var(--step--2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .sheet dd {
+    margin: 0;
+    white-space: nowrap;
+  }
+  .sheet .num {
+    color: var(--highlight);
+    font-weight: 500;
+  }
+  .sheet a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .sheet a:hover {
+    color: var(--accent);
+  }
+  h1 {
+    font-size: var(--step-4);
+  }
+  .lede {
+    font-size: var(--step-1);
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-bottom: 1rem;
+  }
+  .byline {
+    font-size: var(--step--1);
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .draft {
+    color: var(--highlight);
+    font-weight: 500;
+  }
+  .cover {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2.5rem;
+  }
+  .article-footer {
+    margin-top: 2.5rem;
+  }
+  .tags {
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+  .tags a {
+    color: var(--text);
+  }
+  .tags a:hover {
+    color: var(--accent);
+  }
+  .end {
+    text-align: center;
+    margin-top: 2rem;
+  }
+  @media (max-width: 560px) {
+    .sheet > div {
+      padding-right: 0.75rem;
+      margin-right: 0.75rem;
+    }
+    .sheet .grow {
+      order: 5;
+      flex-basis: 100%;
+      border-right: 0;
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>

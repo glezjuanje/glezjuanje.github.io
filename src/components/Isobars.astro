@@ -1,0 +1,85 @@
+---
+// Fondo decorativo: isobaras cerradas alrededor de una baja (B), con su
+// rótulo en hPa. Cada isobara es la misma curva deformada a otra escala, así
+// que nunca se cruzan. Trazos muy tenues (color --isobar); solo es textura.
+const cx = 930;
+const cy = 150;
+const levels = [1000, 1004, 1008, 1012, 1016, 1020, 1024];
+
+// Radio en función del ángulo: elipse alargada con una ondulación suave que
+// crece con la distancia al centro (las isobaras exteriores se deforman más).
+function radius(theta: number, k: number) {
+  const base = 70 + k * 105;
+  const warp = 1 + 0.1 * Math.sin(2 * theta + 0.6) + 0.06 * k * 0.15 * Math.cos(3 * theta - 0.4);
+  return base * warp;
+}
+
+function isobarPath(k: number) {
+  const n = 96;
+  const pts: [number, number][] = [];
+  for (let i = 0; i < n; i++) {
+    const t = (i / n) * Math.PI * 2;
+    const r = radius(t, k);
+    pts.push([cx + r * 1.55 * Math.cos(t), cy + r * Math.sin(t)]);
+  }
+  // Curva suave por Catmull-Rom convertida a Bézier cúbicas.
+  let d = `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+  for (let i = 0; i < n; i++) {
+    const p0 = pts[(i - 1 + n) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+    const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  return d + 'Z';
+}
+
+// Rótulos sobre cada isobara, justo al sur de la baja (lejos del texto).
+const labelAngle = Math.PI / 2 + 0.12;
+const isobars = levels.map((p, k) => {
+  const r = radius(labelAngle, k);
+  return {
+    p,
+    d: isobarPath(k),
+    lx: cx + r * 1.55 * Math.cos(labelAngle),
+    ly: cy + r * Math.sin(labelAngle),
+  };
+});
+---
+
+<svg class="isobars" viewBox="0 0 1200 560" preserveAspectRatio="xMaxYMin slice" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1.2">
+    {isobars.map((i) => <path d={i.d} />)}
+  </g>
+  <g font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle" dominant-baseline="middle">
+    {
+      isobars.slice(1, 4).map((i) => (
+        <g>
+          <rect x={i.lx - 21} y={i.ly - 9} width="42" height="18" style="fill: var(--bg)" />
+          <text x={i.lx} y={i.ly} fill="currentColor">{i.p}</text>
+        </g>
+      ))
+    }
+  </g>
+  <text
+    x={cx}
+    y={cy + 2}
+    font-family="IBM Plex Mono, monospace"
+    font-size="30"
+    font-weight="500"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    style="fill: color-mix(in srgb, var(--warm) 45%, var(--isobar))">B</text
+  >
+</svg>
+
+<style>
+  .isobars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--isobar);
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>

@@ -1,0 +1,14 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 460' width='800' height='460' font-family='Segoe UI, Helvetica, Arial, sans-serif'>
+<rect width='800' height='460' fill='#ffffff'/>
+<path d='M0,420 C140,400 220,440 330,425 S560,400 800,430 L800,460 L0,460 Z' fill='#e9ece6'/>
+<path d='M20,70 C200,40 330,90 400,110 S600,40 780,70' fill='none' stroke='#245a8d' stroke-width='2'/><path d='M20,104 C200,74 330,149 400,174 S600,74 780,104' fill='none' stroke='#245a8d' stroke-width='2'/><path d='M20,138 C200,108 330,208 400,238 S600,108 780,138' fill='none' stroke='#245a8d' stroke-width='2'/>
+<ellipse cx='400' cy='320' rx='148.5' ry='110' fill='none' stroke='#245a8d' stroke-width='2' stroke-dasharray='6 5'/><ellipse cx='400' cy='320' rx='105.30000000000001' ry='78' fill='none' stroke='#245a8d' stroke-width='2' /><ellipse cx='400' cy='320' rx='64.80000000000001' ry='48' fill='none' stroke='#245a8d' stroke-width='2' /><ellipse cx='400' cy='320' rx='29.700000000000003' ry='22' fill='none' stroke='#245a8d' stroke-width='2' />
+<text x='400' y='328' text-anchor='middle' font-size='26' font-weight='700' fill='#b3261e'>B</text>
+<path d='M560,110 l24,-6 -10,22' fill='none' stroke='#1b2230' stroke-width='2'/>
+<text x='610' y='60' font-size='15' fill='#1b2230'>Chorro polar</text>
+<text x='560' y='300' font-size='15' fill='#1b2230'>Aire frío aislado</text>
+<text x='560' y='320' font-size='15' fill='#1b2230'>en altura</text>
+<path d='M555,305 C520,305 500,310 480,318' fill='none' stroke='#1b2230' stroke-width='1.5'/>
+<text x='24' y='444' font-size='13' fill='#5a6474'>Superficie</text>
+<text x='780' y='444' text-anchor='end' font-size='13' fill='#5a6474'>Esquema idealizado · no representa datos reales</text>
+</svg>

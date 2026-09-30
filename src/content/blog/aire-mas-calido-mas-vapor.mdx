@@ -1,0 +1,43 @@
+---
+title: '[EJEMPLO] Aire más cálido, más vapor de agua: la regla del 7 %'
+date: 2026-09-18
+description: 'La ecuación de Clausius–Clapeyron explica por qué una atmósfera más cálida puede contener más vapor de agua y qué implica para las lluvias intensas.'
+category: Clima
+tags: [Clausius–Clapeyron, vapor de agua, termodinámica, precipitación]
+draft: false
+---
+
+import Figure from '../../components/Figure.astro';
+import cc from '../../assets/blog/clausius-clapeyron.svg';
+
+> Artículo de ejemplo para comprobar el diseño: tabla, fórmulas, figura con pie y hueco de anuncio.
+
+Uno de los resultados más robustos de la física del clima no viene de los modelos, sino de la termodinámica del siglo XIX. La cantidad máxima de vapor de agua que puede contener el aire antes de saturarse depende de la temperatura, y lo hace de forma aproximadamente exponencial.
+
+Esa relación la describe la ecuación de Clausius–Clapeyron. Para la presión de vapor de saturación $e_s$ se escribe así:
+
+$$
+\frac{1}{e_s}\frac{\mathrm{d}e_s}{\mathrm{d}T} = \frac{L_v}{R_v\,T^{2}}
+$$
+
+donde $L_v \approx 2{,}5 \times 10^{6}\ \mathrm{J\,kg^{-1}}$ es el calor latente de vaporización y $R_v \approx 461{,}5\ \mathrm{J\,kg^{-1}\,K^{-1}}$ es la constante de los gases para el vapor de agua.
+
+Si sustituimos una temperatura típica cerca de la superficie, $T \approx 288\ \mathrm{K}$, sale un aumento de alrededor del **6,5 % por cada grado**. Suele redondearse como «la regla del 7 %».
+
+En la práctica se usan aproximaciones empíricas como la fórmula de Magnus, que con los coeficientes de Bolton (1980) da:
+
+$$
+e_s(T) = 6{,}112\,\exp\!\left(\frac{17{,}67\,T}{T + 243{,}5}\right)\ \text{hPa}, \quad T\ \text{en}\ {}^{\circ}\mathrm{C}
+$$
+
+<Figure src={cc} alt="Curva exponencial creciente: la presión de vapor de saturación pasa de unos 6 hPa a 0 °C a unos 74 hPa a 40 °C." credit="Elaboración propia con la fórmula de Magnus (Bolton, 1980).">Presión de vapor de saturación $e_s$ en función de la temperatura. Cada grado adicional permite algo más de vapor que el anterior.</Figure>
+
+| Temperatura (°C) | $e_s$ (hPa) | Aumento respecto a 1 °C menos |
+| ---: | ---: | ---: |
+| 0 | 6,1 | — |
+| 10 | 12,3 | 7,0 % |
+| 20 | 23,4 | 6,4 % |
+| 30 | 42,5 | 5,9 % |
+| 40 | 73,9 | 5,5 % |
+
+Que el aire *pueda* contener más vapor no significa que siempre lo contenga, ni que llueva un 7 % más en todas partes. La precipitación media global está limitada por el balance de energía y aumenta más despacio. En cambio, los episodios de precipitación más intensos tienden a acercarse a esa tasa, o incluso a superarla.

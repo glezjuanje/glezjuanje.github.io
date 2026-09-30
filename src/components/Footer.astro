@@ -1,0 +1,78 @@
+---
+import { SITE, SOCIAL } from '../config/site';
+import StationMark from './StationMark.astro';
+const year = new Date().getFullYear();
+const social = SOCIAL.filter((s) => s.url);
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <hr class="double-rule" />
+    <div class="inner">
+      <p class="sign">
+        <StationMark size={20} />
+        <span>{SITE.name}</span>
+        <span class="muted">© {year}</span>
+      </p>
+      <nav aria-label="Pie de página">
+        <ul>
+          <li><a href="/rss.xml">RSS</a></li>
+          <li><a href="/contacto/">Contacto</a></li>
+          {
+            social.map((s) => (
+              <li>
+                <a href={s.url} rel="me noopener" target="_blank">
+                  {s.name}
+                </a>
+              </li>
+            ))
+          }
+          <li><a href="/legal/aviso-legal/">Aviso legal</a></li>
+          <li><a href="/legal/privacidad/">Privacidad</a></li>
+          <li><a href="/legal/cookies/">Cookies</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 5rem;
+    padding-bottom: 2rem;
+  }
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem 2rem;
+    padding-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .sign {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+</style>

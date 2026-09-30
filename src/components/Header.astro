@@ -1,0 +1,122 @@
+---
+import { SITE } from '../config/site';
+import StationMark from './StationMark.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+const nav = [
+  { href: '/blog/', label: 'Blog' },
+  { href: '/sobre-mi/', label: 'Sobre mí' },
+  { href: '/publicaciones/', label: 'Publicaciones' },
+  { href: '/contacto/', label: 'Contacto' },
+];
+
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isActive = (href: string) => path.startsWith(href);
+---
+
+<header class="masthead">
+  <div class="container">
+    <div class="strip label">
+      <span>Meteorología · Clima · Divulgación</span>
+      <ThemeToggle />
+    </div>
+    <div class="main">
+      <a class="brand" href="/" aria-label={`${SITE.name}, ir a la portada`}>
+        <StationMark size={34} />
+        <span>{SITE.name}</span>
+      </a>
+      <nav aria-label="Principal">
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <hr class="double-rule" />
+  </div>
+</header>
+
+<style>
+  .masthead {
+    padding-top: 0.5rem;
+  }
+  .strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding-block: 0.9rem 0.8rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .brand svg {
+    color: var(--text);
+  }
+  .brand:hover svg {
+    color: var(--highlight);
+  }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+  }
+  nav a:hover {
+    border-bottom-color: currentColor;
+  }
+  nav a[aria-current='page'] {
+    color: var(--highlight);
+    border-bottom-color: currentColor;
+  }
+  @media (max-width: 480px) {
+    .strip > span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    nav ul {
+      gap: 0.4rem 1rem;
+    }
+    nav a {
+      letter-spacing: 0.04em;
+    }
+  }
+</style>

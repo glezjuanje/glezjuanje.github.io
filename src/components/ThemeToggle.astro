@@ -1,0 +1,48 @@
+---
+// Interruptor día/noche en texto. El tema inicial lo fija el script en línea
+// de BaseLayout (antes del primer pintado) para evitar el parpadeo.
+---
+
+<button class="theme-toggle mono" type="button" aria-label="Cambiar entre modo día y modo noche">
+  <span class="opt opt--light">día</span><span aria-hidden="true">/</span><span class="opt opt--dark">noche</span>
+</button>
+
+<script>
+  for (const btn of document.querySelectorAll<HTMLButtonElement>('.theme-toggle')) {
+    btn.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+    });
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    gap: 0.3em;
+    padding: 0.2rem 0;
+    border: 0;
+    background: none;
+    color: var(--text-muted);
+    font-size: var(--step--2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .opt {
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+  }
+  .theme-toggle:hover .opt {
+    color: var(--text);
+  }
+  :global(html:not([data-theme='dark'])) .opt--light,
+  :global(html[data-theme='dark']) .opt--dark {
+    color: var(--text);
+    border-bottom-color: currentColor;
+  }
+</style>

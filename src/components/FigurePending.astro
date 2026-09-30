@@ -1,0 +1,30 @@
+---
+/**
+ * Hueco para una figura que aún no tiene imagen. Mantiene la numeración
+ * «FIG. n» y muestra el pie previsto. Cuando tengas la imagen, sustitúyelo por:
+ *   <Figure src={imagen} alt="…">Pie de figura</Figure>
+ */
+---
+
+<figure class="fig fig--pending">
+  <div class="slot" aria-hidden="true">[PENDIENTE: imagen]</div>
+  <figcaption><slot /></figcaption>
+</figure>
+
+<style>
+  .slot {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    border: 1px dashed var(--text-muted);
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0 12px,
+      color-mix(in srgb, var(--text-muted) 10%, transparent) 12px 13px
+    );
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+  }
+</style>

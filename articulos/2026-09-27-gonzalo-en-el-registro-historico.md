@@ -1,0 +1,48 @@
+# Gonzalo en el registro histórico
+
+## De casi un centenar de ciclones formados junto a la costa africana desde 1851, apenas seis subieron hacia el norte manteniéndose como tormenta tropical
+
+En los dos artículos anteriores te contaba la formación de la tormenta tropical Gonzalo al este de Cabo Verde y los motivos por los que se desorganizó tan rápido. Queda una pregunta pendiente: ¿hasta qué punto ha sido un caso anómalo?
+
+Para responderla he consultado HURDAT2, la base de datos de trayectorias de ciclones del Atlántico que mantiene el NHC, con registros desde 1851.
+
+[Figura: trayectorias históricas de HURDAT que atraviesan la zona entre Cabo Verde y la costa africana (NOAA Historical Hurricane Tracks)]
+
+## La mayoría se va hacia el oeste
+
+En el mapa se ve con claridad el comportamiento habitual. Casi todas las trayectorias que pasan por esta zona se dirigen hacia el oeste, empujadas por los alisios en el flanco sur del anticiclón subtropical. Algunas se debilitan pronto y otras acaban convertidas en grandes huracanes al otro lado del Atlántico.
+
+Si ampliamos la búsqueda a todos los ciclones que se formaron al este de los 23°W, la cifra asciende a 97 entre 1851 y 2023. De ellos, 67 se registraron a partir de 1966, cuando los satélites empezaron a vigilar de forma sistemática el Atlántico oriental. Esto ya indica que los datos anteriores subestiman, casi con seguridad, la actividad real en esta zona.
+
+## Muy pocos han subido hacia el norte
+
+La situación cambia mucho si nos fijamos en los que tomaron rumbo norte sin alejarse de África. Solo seis de esos 97 alcanzaron los 19°N con intensidad de tormenta tropical mientras seguían al este de los 25°W: un ciclón sin nombre en 1923, Becky en 1962, Ginger en 1967, otro sin nombre en 1988, Felix en 1989 y Hermine en 2022. Es decir, en torno a un 6 %.
+
+Becky es el caso más llamativo, y es la trayectoria que se aprecia en el mapa subiendo hasta latitudes de la península. Se formó el 27 de agosto de 1962 cerca de la costa senegalesa, pasó al oeste de Canarias como tormenta tropical y llegó hasta unos 37°N antes de transformarse en un ciclón extratropical cerca de las Azores.
+
+El resto se quedó bastante más al sur. La tormenta de 1988 alcanzó los 50 nudos y se debilitó hacia los 25°N. Hermine mantuvo la categoría de tormenta tropical hasta unos 19°N y, ya como depresión y después como baja remanente, siguió subiendo hacia Canarias, donde dejó lluvias récord.
+
+Gonzalo se suma ahora a esta lista corta. Mantuvo la intensidad de tormenta tropical hasta unos 19°N, en torno a los 23°W, antes de que el NHC lo declarara postropical el 26 de septiembre.
+
+## Qué podemos concluir
+
+Con estos datos, creo que es justo calificar a Gonzalo de anomalía. Su intensidad fue modesta, pero su trayectoria está entre las menos frecuentes del registro.
+
+También llama la atención cómo se reparten estos casos en el tiempo. Hubo cuatro entre 1962 y 1989, ninguno durante más de tres décadas, y ahora dos en solo cuatro años: Hermine y Gonzalo.
+
+Conviene, eso sí, no sacar conclusiones precipitadas. Hablamos de muy pocos casos, y con una muestra así cualquier agrupación puede deberse al azar. Además, los registros anteriores a la era de los satélites son incompletos, y los criterios para clasificar un sistema como tormenta tropical han cambiado con el tiempo.
+
+Lo que sí sabemos es que el Atlántico oriental está hoy más cálido que hace unas décadas, y que eso amplía la zona donde estos sistemas pueden formarse y mantenerse. Como vimos con Gonzalo, la cizalladura asociada a las vaguadas de latitudes medias sigue actuando como freno. Si en los próximos años se repiten casos como estos, tendremos una señal más sólida que estudiar. De momento es una pregunta abierta, y seguiremos atentos.
+
+---
+
+**Nota metodológica**
+
+Datos: HURDAT2 (1851-2023). Se consideran los ciclones cuyo primer registro como sistema tropical o subtropical se sitúa al este de 23°W y al sur de 25°N, y se cuentan como trayectoria hacia el norte los que tienen al menos un registro de tormenta tropical o huracán al norte de 19°N y al este de 25°W. Se excluye Chloe (1967), que entra en esa zona tras recurvar por el Atlántico central.
+
+**Para saber más**
+
+- NHC, base de datos HURDAT2: https://www.nhc.noaa.gov/data/#hurdat
+- NOAA, Historical Hurricane Tracks: https://coast.noaa.gov/hurricanes/
+- NHC, discusión n.º 8, ciclón postropical Gonzalo (26 sep 2026): https://capeweather.com/post-tropical-cyclone-gonzalo-forecast-discussion-number-8/
+- Landsea, C. W. y Franklin, J. L. (2013). Atlantic hurricane database uncertainty and presentation of a new database format. *Monthly Weather Review*, 141, 3576–3592.

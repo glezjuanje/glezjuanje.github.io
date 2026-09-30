@@ -1,0 +1,108 @@
+/*
+ * Tokens de diseño · estética de boletín meteorológico.
+ * Dos variantes para elegir (atributo data-variant en <html>):
+ *   papel     — tinta sobre papel cálido; Newsreader en titulares y lectura
+ *   sinoptico — tonos fríos de mapa; IBM Plex Sans Condensed en titulares
+ * Ambas usan IBM Plex Mono para datos, fechas y metadatos, y los colores
+ * convencionales de los frentes (frío azul, cálido rojo, ocluido violeta).
+ * Cada una con modo día y noche (atributo data-theme).
+ */
+
+:root {
+  --font-serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+  --font-prose: var(--font-serif);
+  --font-ui: var(--font-mono);
+  --radius: 2px;
+  --measure: 66ch;
+  --wide: 70rem;
+  --step--2: 0.74rem;
+  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.86rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  --step-3: clamp(1.9rem, 1.5rem + 1.6vw, 2.75rem);
+  --step-4: clamp(2.3rem, 1.7rem + 2.8vw, 3.9rem);
+}
+
+/* ---------- Variante «Papel» ---------- */
+:root,
+:root[data-variant='papel'] {
+  --font-heading: var(--font-serif);
+  --heading-weight: 500;
+  --heading-tracking: -0.015em;
+
+  --bg: #f3f0e8;
+  --bg-soft: #ebe7dc;
+  --surface: #f8f6f0;
+  --text: #1c1b19;
+  --text-muted: #6a6458;
+  --border: #d6cfbf;
+  --rule: #1c1b19;
+  --accent: #1f4a86;
+  --accent-hover: #12325f;
+  --highlight: #b0301f;
+  --selection: #f0d9a8;
+  --isobar: #d3cbb8;
+  --cold: #2455a4;
+  --warm: #c0362c;
+  --occluded: #7b3fa0;
+}
+:root[data-theme='dark'],
+:root[data-variant='papel'][data-theme='dark'] {
+  --bg: #161513;
+  --bg-soft: #1e1d1a;
+  --surface: #1b1a17;
+  --text: #e9e4d8;
+  --text-muted: #9d9686;
+  --border: #34312b;
+  --rule: #e9e4d8;
+  --accent: #8fb3e8;
+  --accent-hover: #b5cdf0;
+  --highlight: #ec7a6a;
+  --selection: #4a3d22;
+  --isobar: #2d2b26;
+  --cold: #6f9be0;
+  --warm: #ec7a6a;
+  --occluded: #b98ad6;
+}
+
+/* ---------- Variante «Sinóptico» ---------- */
+:root[data-variant='sinoptico'] {
+  --font-heading: 'IBM Plex Sans Condensed', 'Arial Narrow', sans-serif;
+  --heading-weight: 600;
+  --heading-tracking: -0.01em;
+
+  --bg: #f4f6f6;
+  --bg-soft: #e9eef0;
+  --surface: #fbfcfc;
+  --text: #122033;
+  --text-muted: #56657a;
+  --border: #d0d9e0;
+  --rule: #122033;
+  --accent: #1d5fa8;
+  --accent-hover: #123f73;
+  --highlight: #c2410c;
+  --selection: #cfe2f6;
+  --isobar: #cdd7df;
+  --cold: #1d5fa8;
+  --warm: #c8372d;
+  --occluded: #7a3ea3;
+}
+:root[data-variant='sinoptico'][data-theme='dark'] {
+  --bg: #0f1620;
+  --bg-soft: #16202c;
+  --surface: #131c27;
+  --text: #e2e8ef;
+  --text-muted: #93a1b1;
+  --border: #263342;
+  --rule: #e2e8ef;
+  --accent: #7fb2ea;
+  --accent-hover: #a9cbf1;
+  --highlight: #f08a4b;
+  --selection: #1f3b5c;
+  --isobar: #1e2a37;
+  --cold: #7fb2ea;
+  --warm: #f07b6e;
+  --occluded: #c294e0;
+}

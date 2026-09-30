@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostRow from '../components/PostRow.astro';
+import Isobars from '../components/Isobars.astro';
+import FrontGlyph from '../components/FrontGlyph.astro';
+import { CATEGORIES, SITE } from '../config/site';
+import { categoryUrl, getPostNumbers, getPosts } from '../utils/posts';
+
+const latest = (await getPosts()).slice(0, SITE.latestOnHome);
+const numbers = await getPostNumbers();
+---
+
+<BaseLayout>
+  <section class="intro">
+    <Isobars />
+    <div class="container">
+      <p class="lead">
+        Soy Juanje, meteorólogo y científico del clima.
+        <span class="pending">[PENDIENTE: una o dos frases en tu voz sobre qué haces y qué vas a publicar aquí.]</span>
+      </p>
+      <p class="more mono"><a href="/sobre-mi/">Más sobre mí →</a></p>
+    </div>
+  </section>
+
+  <div class="container home-grid">
+    <section aria-labelledby="latest-title">
+      <div class="section-head">
+        <h2 id="latest-title" class="label">Últimas entradas</h2>
+        <a class="label" href="/blog/">Archivo completo →</a>
+      </div>
+      <ol class="log">
+        {latest.map((post) => <PostRow post={post} number={numbers.get(post.id)} headingLevel="h3" />)}
+      </ol>
+    </section>
+
+    <aside class="legend" aria-labelledby="legend-title">
+      <h2 id="legend-title" class="label">Leyenda</h2>
+      <ul>
+        {
+          CATEGORIES.map((c) => (
+            <li>
+              <a href={categoryUrl(c.name)}>
+                <FrontGlyph category={c.name} width={36} />
+                <span>
+                  <strong>{c.name}</strong>
+                  <small>{c.description}</small>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .intro {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(3rem, 9vw, 6.5rem) clamp(2.5rem, 6vw, 4rem);
+  }
+  .lead {
+    font-family: var(--font-heading);
+    font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.9rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    max-width: 24ch;
+    margin: 0;
+  }
+  .lead .pending {
+    font-size: 0.6em;
+    display: inline-block;
+    line-height: 1.35;
+    margin-top: 0.5em;
+    font-family: var(--font-serif);
+    font-style: italic;
+  }
+  .more {
+    margin: 1.5rem 0 0;
+  }
+  .more a {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: var(--step--2);
+  }
+
+  .home-grid {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1000px) {
+    .home-grid {
+      grid-template-columns: minmax(0, 1fr) 15rem;
+      gap: 4rem;
+    }
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+  .section-head h2 {
+    margin: 0;
+    color: var(--text);
+  }
+  .section-head a {
+    text-decoration: none;
+    color: var(--accent);
+  }
+  .log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .legend h2 {
+    color: var(--text);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+    margin: 0 0 0.5rem;
+  }
+  .legend ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .legend a {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 0.75rem;
+    align-items: start;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+  }
+  .legend a :global(svg) {
+    margin-top: 0.45rem;
+  }
+  .legend strong {
+    display: block;
+    font-weight: 600;
+  }
+  .legend a:hover strong {
+    color: var(--accent);
+  }
+  .legend small {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+</style>

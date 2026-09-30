@@ -1,0 +1,58 @@
+---
+// Símbolo de categoría con la notación de frentes de los mapas sinópticos:
+//   Actualidad meteo → frente frío (triángulos, azul)
+//   Clima            → frente cálido (semicírculos, rojo)
+//   Divulgación      → frente ocluido (alternos, violeta)
+import { categorySlug } from '../utils/posts';
+
+export interface Props {
+  category: string;
+  width?: number;
+}
+const { category, width = 30 } = Astro.props;
+const kind = { 'actualidad-meteo': 'cold', clima: 'warm', divulgacion: 'occluded' }[categorySlug(category)] ?? 'cold';
+---
+
+<svg class={`front front--${kind}`} viewBox="0 0 30 10" width={width} height={width / 3} aria-hidden="true">
+  <path d="M0 8.5h30" stroke="currentColor" stroke-width="1.6"></path>
+  {
+    kind === 'cold' && (
+      <>
+        <path d="M3 8.5 6.5 2 10 8.5Z" fill="currentColor" />
+        <path d="M17 8.5 20.5 2 24 8.5Z" fill="currentColor" />
+      </>
+    )
+  }
+  {
+    kind === 'warm' && (
+      <>
+        <path d="M3 8.5a3.6 3.6 0 0 1 7.2 0Z" fill="currentColor" />
+        <path d="M17 8.5a3.6 3.6 0 0 1 7.2 0Z" fill="currentColor" />
+      </>
+    )
+  }
+  {
+    kind === 'occluded' && (
+      <>
+        <path d="M3 8.5 6.5 2 10 8.5Z" fill="currentColor" />
+        <path d="M17 8.5a3.6 3.6 0 0 1 7.2 0Z" fill="currentColor" />
+      </>
+    )
+  }
+</svg>
+
+<style>
+  .front {
+    flex: none;
+    vertical-align: baseline;
+  }
+  .front--cold {
+    color: var(--cold);
+  }
+  .front--warm {
+    color: var(--warm);
+  }
+  .front--occluded {
+    color: var(--occluded);
+  }
+</style>

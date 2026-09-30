@@ -1,0 +1,249 @@
+---
+// Publicaciones copiadas de Google Scholar (src/data/publications.json).
+// Para actualizarlas: `npm run pubs`.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import data from '../data/publications.json';
+import { formatShortDate } from '../utils/posts';
+
+type Pub = (typeof data.publications)[number] & { doi?: string; openAccessUrl?: string };
+const pubs = data.publications as Pub[];
+
+// Agrupa por año (las entradas sin año, al final).
+const byYear = new Map<string, Pub[]>();
+for (const p of pubs) {
+  const key = p.year ? String(p.year) : 's. f.';
+  byYear.set(key, [...(byYear.get(key) ?? []), p]);
+}
+
+const normalize = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const isMe = (author: string) => {
+  const n = normalize(author);
+  return n.includes('gonzalez') && n.includes('aleman');
+};
+
+// Scholar abrevia las listas largas de autores con «...».
+function splitAuthors(authors: string) {
+  const truncated = /\.\.\.$|…$/.test(authors.trim());
+  const list = authors
+    .replace(/,?\s*(\.\.\.|…)\s*$/, '')
+    .split(',')
+    .map((a) => a.trim())
+    .filter(Boolean);
+  return { list, truncated };
+}
+
+const link = (p: Pub) => (p.doi ? `https://doi.org/${p.doi}` : p.scholarUrl);
+const updated = formatShortDate(new Date(data.updated));
+const stats = data.stats;
+---
+
+<BaseLayout
+  title="Publicaciones"
+  description="Artículos científicos de Juan Jesús González Alemán sobre ciclones, extremos meteorológicos y predicción climática."
+>
+  <div class="container narrow">
+    <header class="page-header">
+      <p class="label">Producción científica</p>
+      <h1>Publicaciones</h1>
+      <p>
+        Lista copiada de mi <a href={data.source} rel="noopener" target="_blank">perfil de Google Scholar</a>.
+      </p>
+    </header>
+
+    <dl class="sheet mono">
+      <div>
+        <dt>Publicaciones</dt>
+        <dd>{pubs.length}</dd>
+      </div>
+      {
+        stats && (
+          <>
+            <div>
+              <dt>Citas</dt>
+              <dd>{stats.citations.toLocaleString('es-ES')}</dd>
+            </div>
+            <div>
+              <dt>Índice h</dt>
+              <dd>{stats.hIndex}</dd>
+            </div>
+            <div>
+              <dt>Índice i10</dt>
+              <dd>{stats.i10Index}</dd>
+            </div>
+          </>
+        )
+      }
+      <div class="grow">
+        <dt>Actualizado</dt>
+        <dd>{updated}</dd>
+      </div>
+    </dl>
+
+    {
+      [...byYear].map(([year, items]) => (
+        <section class="year" aria-labelledby={`y-${year}`}>
+          <h2 id={`y-${year}`} class="year-label mono">
+            {year}
+          </h2>
+          <ol class="pubs">
+            {items.map((p) => {
+              const { list, truncated } = splitAuthors(p.authors);
+              return (
+                <li>
+                  <h3 class="title">
+                    <a href={link(p)} rel="noopener" target="_blank">
+                      {p.title}
+                    </a>
+                  </h3>
+                  <p class="authors">
+                    {list.map((a, i) => (
+                      <>
+                        {isMe(a) ? <strong>{a}</strong> : a}
+                        {i < list.length - 1 && ', '}
+                      </>
+                    ))}
+                    {truncated && <span class="muted">, et al.</span>}
+                  </p>
+                  {p.venue && <p class="venue">{p.venue}</p>}
+                  <p class="meta mono">
+                    {p.doi && (
+                      <a href={`https://doi.org/${p.doi}`} rel="noopener" target="_blank">
+                        doi:{p.doi}
+                      </a>
+                    )}
+                    {p.openAccessUrl && (
+                      <a href={p.openAccessUrl} rel="noopener" target="_blank">
+                        acceso abierto
+                      </a>
+                    )}
+                    {p.citedBy > 0 && (
+                      <a href={p.scholarUrl} rel="noopener" target="_blank">
+                        {p.citedBy} {p.citedBy === 1 ? 'cita' : 'citas'}
+                      </a>
+                    )}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .sheet {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 2.5rem;
+    border-top: 2px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .sheet > div {
+    padding: 0.45rem 1rem 0.5rem 0;
+    margin-right: 1rem;
+    border-right: 1px solid var(--border);
+  }
+  .sheet > div:last-child {
+    border-right: 0;
+    margin-right: 0;
+  }
+  .sheet .grow {
+    flex: 1;
+    text-align: right;
+  }
+  .sheet dt {
+    font-size: var(--step--2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  .sheet dd {
+    margin: 0;
+    font-size: var(--step-0);
+  }
+
+  .year {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 0 1.5rem;
+    border-top: 2px solid var(--rule);
+  }
+  .year-label {
+    margin: 0;
+    padding-top: 1rem;
+    font-size: var(--step-1);
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--highlight);
+  }
+  .pubs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .pubs li {
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .pubs li:last-child {
+    border-bottom: 0;
+  }
+  .title {
+    font-family: var(--font-heading);
+    font-size: var(--step-0);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 0.3rem;
+  }
+  .title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .title a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .authors {
+    margin: 0;
+    font-size: 0.95em;
+    color: var(--text-muted);
+  }
+  .authors strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .venue {
+    margin: 0.1rem 0 0;
+    font-size: 0.95em;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.1rem;
+    margin: 0.4rem 0 0;
+    font-size: var(--step--2);
+  }
+  .meta a {
+    color: var(--accent);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .meta a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 640px) {
+    .year {
+      grid-template-columns: 1fr;
+    }
+    .year-label {
+      padding-top: 0.6rem;
+    }
+    .sheet .grow {
+      text-align: left;
+    }
+  }
+</style>

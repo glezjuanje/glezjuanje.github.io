@@ -1,0 +1,92 @@
+---
+/**
+ * Hueco de anuncio reutilizable.
+ * - Desarrollo: recuadro gris con el tamaño real del bloque (sin scripts de terceros).
+ * - Producción: bloque AdSense SOLO si hay ID de editor (PUBLIC_ADSENSE_CLIENT)
+ *   y ID de bloque para esta variante. Si falta cualquiera, no se renderiza nada.
+ *
+ * Tamaños: fijos por punto de corte para evitar saltos de maquetación (CLS).
+ *   in-article: 300×250 (móvil) · 336×280 (≥ 768 px)
+ *   end:        300×250 (móvil) · 728×90  (≥ 768 px)
+ */
+import { ADS, adsEnabled } from '../config/site';
+
+export interface Props {
+  variant?: 'in-article' | 'end';
+}
+
+const { variant = 'in-article' } = Astro.props;
+const slot = variant === 'in-article' ? ADS.slots.inArticle : ADS.slots.endOfArticle;
+const isDev = import.meta.env.DEV;
+const renderAd = adsEnabled && slot !== '';
+const sizes = variant === 'in-article' ? '300×250 · 336×280 (≥768px)' : '300×250 · 728×90 (≥768px)';
+---
+
+{
+  (isDev || renderAd) && (
+    <aside class={`ad ad--${variant}`} aria-label="Publicidad">
+      <span class="ad__label">Publicidad</span>
+      {isDev ? (
+        <div class="ad__box ad__placeholder">
+          <span>
+            Anuncio · {variant}
+            <br />
+            <small>{sizes}</small>
+          </span>
+        </div>
+      ) : (
+        <>
+          <ins class="adsbygoogle ad__box" style="display:block" data-ad-client={ADS.client} data-ad-slot={slot} />
+          <script is:inline>(window.adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </>
+      )}
+    </aside>
+  )
+}
+
+<style>
+  .ad {
+    margin: 2.5rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .ad__label {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .ad__box {
+    width: 300px;
+    height: 250px;
+    max-width: 100%;
+  }
+  @media (min-width: 768px) {
+    .ad--in-article .ad__box {
+      width: 336px;
+      height: 280px;
+    }
+    .ad--end .ad__box {
+      width: 728px;
+      height: 90px;
+    }
+  }
+  .ad__placeholder {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--text-muted) 16%, transparent) 0 10px,
+      color-mix(in srgb, var(--text-muted) 22%, transparent) 10px 20px
+    );
+    border: 1px dashed var(--text-muted);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+</style>

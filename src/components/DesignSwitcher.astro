@@ -1,0 +1,70 @@
+---
+// TEMPORAL · solo en desarrollo: alterna entre las variantes «papel» y «sinóptico».
+// Se eliminará cuando elijas una.
+---
+
+{
+  import.meta.env.DEV && (
+    <div class="design-switcher" role="group" aria-label="Variante de diseño (solo desarrollo)">
+      <span>Diseño</span>
+      <button type="button" data-set-variant="papel">
+        Papel
+      </button>
+      <button type="button" data-set-variant="sinoptico">
+        Sinóptico
+      </button>
+    </div>
+  )
+}
+
+<script>
+  const root = document.documentElement;
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-set-variant]');
+  const sync = () =>
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setVariant === root.dataset.variant)));
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      root.dataset.variant = b.dataset.setVariant;
+      try {
+        localStorage.setItem('design-variant', b.dataset.setVariant!);
+      } catch {}
+      sync();
+    }),
+  );
+  sync();
+</script>
+
+<style>
+  .design-switcher {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem;
+    border-radius: 999px;
+    background: #111;
+    color: #fff;
+    font: 600 12px/1 system-ui, sans-serif;
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.25);
+  }
+  .design-switcher span {
+    padding-inline: 0.5rem 0.25rem;
+    opacity: 0.7;
+  }
+  button {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.45rem 0.75rem;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+  }
+  button[aria-pressed='true'] {
+    background: #fff;
+    color: #111;
+  }
+</style>

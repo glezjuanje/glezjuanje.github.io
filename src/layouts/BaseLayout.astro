@@ -1,0 +1,83 @@
+---
+import '@fontsource-variable/newsreader/opsz.css';
+import '@fontsource-variable/newsreader/opsz-italic.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+// Solo para la variante «sinóptico» (se quitará si eliges «papel»).
+import '@fontsource/ibm-plex-sans-condensed/600.css';
+import '../styles/global.css';
+
+import SEO, { type Props as SEOProps } from '../components/SEO.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AdSenseLoader from '../components/AdSenseLoader.astro';
+import DesignSwitcher from '../components/DesignSwitcher.astro';
+import { SITE } from '../config/site';
+
+export type Props = SEOProps;
+const isDev = import.meta.env.DEV;
+---
+
+<!doctype html>
+<html lang={SITE.lang} data-variant="papel">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href={new URL('/rss.xml', Astro.site)} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#f3f0e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />
+    <SEO {...Astro.props} />
+
+    <!-- Tema antes del primer pintado: preferencia guardada o la del sistema. -->
+    <script is:inline>
+      (() => {
+        let t = null;
+        try {
+          t = localStorage.getItem('theme');
+        } catch {}
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+    {
+      isDev && (
+        <script is:inline>
+          try {
+            const v = localStorage.getItem('design-variant');
+            if (v === 'papel' || v === 'sinoptico') document.documentElement.dataset.variant = v;
+          } catch {}
+        </script>
+      )
+    }
+    <AdSenseLoader />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    {isDev && <DesignSwitcher />}
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -3rem;
+    z-index: 100;
+    padding: 0.5rem 0.75rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius);
+  }
+  .skip-link:focus {
+    top: 0.5rem;
+  }
+</style>

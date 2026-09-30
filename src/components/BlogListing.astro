@@ -1,0 +1,196 @@
+---
+import type { Page } from 'astro';
+import { CATEGORIES } from '../config/site';
+import { allTags, categoryUrl, getPostNumbers, getPosts, tagUrl, type Post } from '../utils/posts';
+import PostRow from './PostRow.astro';
+import Pagination from './Pagination.astro';
+import FrontGlyph from './FrontGlyph.astro';
+
+export interface Props {
+  page: Page<Post>;
+  heading: string;
+  intro?: string;
+  kicker?: string;
+  activeCategory?: string;
+  activeTag?: string;
+}
+
+const { page, heading, intro, kicker = 'Archivo', activeCategory, activeTag } = Astro.props;
+const tags = allTags(await getPosts());
+const numbers = await getPostNumbers();
+---
+
+<div class="container">
+  <header class="page-header">
+    <p class="label">{kicker}</p>
+    <h1>{heading}</h1>
+    {intro && <p>{intro}</p>}
+  </header>
+
+  <div class="layout">
+    <section aria-label="Artículos">
+      <div class="cols label" aria-hidden="true">
+        <span>Nº</span><span>Fecha</span><span>Título</span><span>Categoría</span>
+      </div>
+      {
+        page.data.length === 0 ? (
+          <p class="muted">Todavía no hay artículos aquí.</p>
+        ) : (
+          <ol class="log">
+            {page.data.map((post) => (
+              <PostRow post={post} number={numbers.get(post.id)} />
+            ))}
+          </ol>
+        )
+      }
+      <Pagination page={page} />
+    </section>
+
+    <aside class="filters" aria-label="Filtrar artículos">
+      <h2 class="label">Leyenda</h2>
+      <ul class="cats">
+        <li>
+          <a href="/blog/" aria-current={!activeCategory && !activeTag ? 'page' : undefined}>
+            <span class="all" aria-hidden="true"></span>Todas
+          </a>
+        </li>
+        {
+          CATEGORIES.map((c) => (
+            <li>
+              <a href={categoryUrl(c.name)} aria-current={activeCategory === c.slug ? 'page' : undefined}>
+                <FrontGlyph category={c.name} width={30} />
+                {c.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      {
+        tags.length > 0 && (
+          <>
+            <h2 class="label">Etiquetas</h2>
+            <p class="tags mono">
+              {tags.map((t, i) => (
+                <>
+                  <a href={tagUrl(t.name)} aria-current={activeTag === t.slug ? 'page' : undefined}>
+                    {t.name}
+                  </a>
+                  <sup>{t.count}</sup>
+                  {i < tags.length - 1 && ', '}
+                </>
+              ))}
+            </p>
+          </>
+        )
+      }
+      <p class="rss label"><a href="/rss.xml">Suscripción RSS →</a></p>
+    </aside>
+  </div>
+</div>
+
+<style>
+  .layout {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 1000px) {
+    .layout {
+      grid-template-columns: minmax(0, 1fr) 15rem;
+      gap: 4rem;
+    }
+    .filters {
+      position: sticky;
+      top: 1.5rem;
+      align-self: start;
+    }
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 4.5rem 7rem minmax(0, 1fr) 11rem;
+    gap: 1.25rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--rule);
+    color: var(--text);
+  }
+  .cols span:last-child {
+    text-align: right;
+  }
+  @media (max-width: 820px) {
+    .cols {
+      display: block;
+    }
+    .cols span:not(:first-child) {
+      display: none;
+    }
+    .cols span:first-child::after {
+      content: ' · Registro';
+    }
+  }
+  .log {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .filters h2 {
+    color: var(--text);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+    margin: 0 0 0.5rem;
+  }
+  .filters h2 + * {
+    margin-top: 0;
+  }
+  .filters h2:not(:first-child) {
+    margin-top: 2rem;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .cats a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 0.45rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .cats a:hover {
+    color: var(--accent);
+  }
+  .cats a[aria-current='page'] {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  .all {
+    display: inline-block;
+    width: 30px;
+    border-top: 1.6px solid currentColor;
+  }
+  .tags {
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+  .tags a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .tags a:hover,
+  .tags a[aria-current='page'] {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+  .tags sup {
+    color: var(--text-muted);
+    font-size: 0.7em;
+    margin-left: 0.1em;
+  }
+  .rss {
+    margin-top: 2rem;
+  }
+  .rss a {
+    text-decoration: none;
+  }
+</style>
