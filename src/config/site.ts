@@ -3,10 +3,10 @@
 import { PUBLIC_SECTIONS } from './sections.mjs';
 
 export const SITE = {
-  name: 'Juanje',
-  title: 'Juanje · Meteorología y clima',
+  name: 'Meteorología | Clima | Divulgación',
+  title: 'Meteorología | Clima | Divulgación · Juan Jesús González Alemán',
   description:
-    'Web personal y blog de Juanje, meteorólogo y científico del clima: actualidad meteorológica, clima y divulgación.',
+    'Blog de Juan Jesús González Alemán sobre actualidad meteorológica, clima y divulgación.',
   author: 'Juan Jesús González Alemán',
   lang: 'es',
   locale: 'es_ES',
@@ -19,7 +19,7 @@ export const SITE = {
   // Imagen por defecto para Open Graph (1200×630) en public/.
   ogImage: '/og-default.png',
   postsPerPage: 10,
-  latestOnHome: 3,
+  latestOnHome: 10,
 };
 
 // Deja la url vacía ('') para ocultar una red en cabecera/pie.

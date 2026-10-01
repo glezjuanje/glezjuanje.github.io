@@ -26,6 +26,8 @@ const numbers = await getPostNumbers();
 
 {showBlog && (
 <BaseLayout>
+  {/* Presentación: de momento solo en desarrollo, para una portada limpia. */}
+  {import.meta.env.DEV && (
   <section class="intro">
     <Isobars />
     <div class="container">
@@ -40,6 +42,7 @@ const numbers = await getPostNumbers();
       {isVisible('sobreMi') && <p class="more mono"><a href="/sobre-mi/">Más sobre mí →</a></p>}
     </div>
   </section>
+  )}
 
   <div class="container home-grid">
     <section aria-labelledby="latest-title">
@@ -109,6 +112,7 @@ const numbers = await getPostNumbers();
   .home-grid {
     display: grid;
     gap: 3rem;
+    padding-top: clamp(2rem, 5vw, 3rem);
   }
   @media (min-width: 1000px) {
     .home-grid {

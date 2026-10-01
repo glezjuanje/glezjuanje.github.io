@@ -12,7 +12,7 @@ const social = SOCIAL.filter((s) => s.url);
     <div class="inner">
       <p class="sign">
         <StationMark size={20} />
-        <span>{SITE.name}</span>
+        <span>{SITE.author}</span>
         <span class="muted">© {year}</span>
         {
           (analyticsEnabled || import.meta.env.DEV) && (
