@@ -27,9 +27,15 @@ const social = SOCIAL.filter((s) => s.url);
               </li>
             ))
           }
-          <li><a href="/legal/aviso-legal/">Aviso legal</a></li>
-          <li><a href="/legal/privacidad/">Privacidad</a></li>
-          <li><a href="/legal/cookies/">Cookies</a></li>
+          {
+            isVisible('legal') && (
+              <>
+                <li><a href="/legal/aviso-legal/">Aviso legal</a></li>
+                <li><a href="/legal/privacidad/">Privacidad</a></li>
+                <li><a href="/legal/cookies/">Cookies</a></li>
+              </>
+            )
+          }
         </ul>
       </nav>
     </div>
