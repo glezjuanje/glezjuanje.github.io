@@ -11,6 +11,11 @@ export const SITE = {
   lang: 'es',
   locale: 'es_ES',
   email: '[PENDIENTE]@ejemplo-dominio.es',
+  // Cabecera de la web: título (las barras se pintan atenuadas) y firma.
+  masthead: {
+    title: 'Meteorología | Clima | Divulgación',
+    byline: 'by Juan Jesús González Alemán',
+  },
   // Imagen por defecto para Open Graph (1200×630) en public/.
   ogImage: '/og-default.png',
   postsPerPage: 10,
