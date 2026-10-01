@@ -1,0 +1,40 @@
+---
+/**
+ * Número de visitas de una página (o del sitio entero con path="TOTAL"),
+ * leído del contador público de GoatCounter. Requiere activar en GoatCounter
+ * «Allow adding visitor counts on your website». Los datos se cachean hasta
+ * 4 horas, así que no se actualizan al instante.
+ *
+ * Sin código de GoatCounter no se pinta nada (en desarrollo muestra «—»).
+ */
+import { ANALYTICS, analyticsEnabled } from '../config/site';
+
+export interface Props {
+  path: string;
+  class?: string;
+}
+const { path, class: className } = Astro.props;
+const show = analyticsEnabled || import.meta.env.DEV;
+---
+
+{
+  show && (
+    <span class={className} data-visit-count={path} data-endpoint={analyticsEnabled ? ANALYTICS.endpoint : undefined}>
+      —
+    </span>
+  )
+}
+
+<script>
+  const nf = new Intl.NumberFormat('es-ES');
+  for (const el of document.querySelectorAll<HTMLElement>('[data-visit-count][data-endpoint]')) {
+    const { visitCount: path, endpoint } = el.dataset;
+    fetch(`${endpoint}/counter/${encodeURIComponent(path!)}.json`)
+      .then((r) => (r.ok ? r.json() : { count: '0' }))
+      .then((d: { count: string }) => {
+        // GoatCounter devuelve el número formateado en inglés ("1,234").
+        el.textContent = nf.format(Number(String(d.count).replace(/[^\d]/g, '')) || 0);
+      })
+      .catch(() => {});
+  }
+</script>

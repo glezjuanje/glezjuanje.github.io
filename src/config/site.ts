@@ -68,6 +68,15 @@ export const ADS = {
 
 export const adsEnabled = import.meta.env.PROD && ADS.client !== '';
 
+// Estadísticas de visitas con GoatCounter (sin cookies). Desactivado mientras
+// PUBLIC_GOATCOUNTER_CODE esté vacío. El código es el subdominio de tu cuenta:
+// si tu panel es https://juanje.goatcounter.com, el código es «juanje».
+const goatcounterCode = (import.meta.env.PUBLIC_GOATCOUNTER_CODE ?? '').trim();
+export const ANALYTICS = {
+  endpoint: goatcounterCode ? `https://${goatcounterCode}.goatcounter.com` : '',
+};
+export const analyticsEnabled = import.meta.env.PROD && ANALYTICS.endpoint !== '';
+
 // Secciones publicadas (ver src/config/sections.mjs). En desarrollo, todo visible.
 export type Section = keyof typeof PUBLIC_SECTIONS;
 export const isVisible = (section: Section) => import.meta.env.DEV || PUBLIC_SECTIONS[section];

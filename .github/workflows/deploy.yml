@@ -31,6 +31,8 @@ jobs:
           PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
           PUBLIC_ADSENSE_SLOT_IN_ARTICLE: ${{ vars.PUBLIC_ADSENSE_SLOT_IN_ARTICLE }}
           PUBLIC_ADSENSE_SLOT_END: ${{ vars.PUBLIC_ADSENSE_SLOT_END }}
+          # Código de GoatCounter (estadísticas sin cookies). Vacío = desactivado.
+          PUBLIC_GOATCOUNTER_CODE: ${{ vars.PUBLIC_GOATCOUNTER_CODE }}
 
   deploy:
     needs: build

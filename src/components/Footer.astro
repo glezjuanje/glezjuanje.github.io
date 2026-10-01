@@ -1,6 +1,7 @@
 ---
-import { SITE, SOCIAL, isVisible } from '../config/site';
+import { SITE, SOCIAL, analyticsEnabled, isVisible } from '../config/site';
 import StationMark from './StationMark.astro';
+import VisitCount from './VisitCount.astro';
 const year = new Date().getFullYear();
 const social = SOCIAL.filter((s) => s.url);
 ---
@@ -13,6 +14,13 @@ const social = SOCIAL.filter((s) => s.url);
         <StationMark size={20} />
         <span>{SITE.name}</span>
         <span class="muted">© {year}</span>
+        {
+          (analyticsEnabled || import.meta.env.DEV) && (
+            <span class="muted">
+              · <VisitCount path="TOTAL" /> visitas
+            </span>
+          )
+        }
       </p>
       <nav aria-label="Pie de página">
         <ul>
