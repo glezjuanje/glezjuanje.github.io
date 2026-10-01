@@ -1,15 +1,24 @@
 ---
 /**
- * Hueco para una figura que aún no tiene imagen. Mantiene la numeración
- * «FIG. n» y muestra el pie previsto. Cuando tengas la imagen, sustitúyelo por:
- *   <Figure src={imagen} alt="…">Pie de figura</Figure>
+ * Hueco para una figura que aún no tiene imagen. Solo se ve en desarrollo
+ * (en la web publicada no aparece). Mantiene la numeración «FIG. n» y muestra
+ * el pie previsto. Cuando tengas la imagen, sustitúyelo por:
+ *   ![Descripción](imagen.jpg "Pie de figura")
  */
 ---
 
-<figure class="fig fig--pending">
-  <div class="slot" aria-hidden="true">[PENDIENTE: imagen]</div>
-  <figcaption><slot /></figcaption>
-</figure>
+{
+  import.meta.env.DEV && (
+    <figure class="fig fig--pending">
+      <div class="slot" aria-hidden="true">
+        [PENDIENTE: imagen]
+      </div>
+      <figcaption>
+        <slot />
+      </figcaption>
+    </figure>
+  )
+}
 
 <style>
   .slot {

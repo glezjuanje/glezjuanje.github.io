@@ -31,9 +31,13 @@ const numbers = await getPostNumbers();
     <div class="container">
       <p class="lead">
         Soy Juanje, meteorólogo y científico del clima.
-        <span class="pending">[PENDIENTE: una o dos frases en tu voz sobre qué haces y qué vas a publicar aquí.]</span>
+        {
+          import.meta.env.DEV && (
+            <span class="pending">[PENDIENTE: una o dos frases en tu voz sobre qué haces y qué vas a publicar aquí.]</span>
+          )
+        }
       </p>
-      <p class="more mono"><a href="/sobre-mi/">Más sobre mí →</a></p>
+      {isVisible('sobreMi') && <p class="more mono"><a href="/sobre-mi/">Más sobre mí →</a></p>}
     </div>
   </section>
 

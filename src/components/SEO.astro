@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../config/site';
+import { SITE, isVisible } from '../config/site';
 
 export interface Props {
   title?: string;
@@ -41,7 +41,11 @@ const jsonLd =
         image: imageUrl.href,
         datePublished: publishedTime?.toISOString(),
         dateModified: (modifiedTime ?? publishedTime)?.toISOString(),
-        author: { '@type': 'Person', name: SITE.author, url: new URL('/sobre-mi/', Astro.site).href },
+        author: {
+          '@type': 'Person',
+          name: SITE.author,
+          url: new URL(isVisible('sobreMi') ? '/sobre-mi/' : '/', Astro.site).href,
+        },
         mainEntityOfPage: canonical.href,
         keywords: tags.join(', '),
         articleSection: section,
