@@ -1,0 +1,326 @@
+---
+import '../styles/prose.css';
+import StationMark from './StationMark.astro';
+import { SITE, SOCIAL, isVisible } from '../config/site';
+
+// Fuente: perfil de LinkedIn de Juanje (extracto y experiencia), traducido.
+// [REVISAR] la traducción y completar lo marcado como [PENDIENTE].
+
+const areas = [
+  {
+    title: 'Extremos meteorológicos y climáticos',
+    text: 'Olas de calor, tormentas convectivas y ciclones.',
+  },
+  {
+    title: 'Predicción climática',
+    text: 'Predicción estacional operativa en AEMET y coordinación del MedCOF.',
+  },
+  {
+    title: 'Predecibilidad, variabilidad y cambio',
+    text: 'Del tiempo y del clima.',
+  },
+  {
+    title: 'Predicción numérica del tiempo',
+    text: 'Investigación y desarrollo en modelización atmosférica (AEMET, 2021–2025).',
+  },
+];
+
+const timeline = [
+  {
+    period: 'V·2025 – hoy',
+    role: 'Jefe del Servicio de Predicción Climática y coordinador del MedCOF',
+    place: 'AEMET',
+  },
+  {
+    period: 'IX·2021 – IV·2025',
+    role: 'I+D en Predicción Numérica del Tiempo y Modelización Atmosférica',
+    place: 'AEMET · Área de Modelización, Departamento de Desarrollo y Aplicaciones',
+  },
+  {
+    period: 'III·2020 – I·2022',
+    role: 'Investigador postdoctoral (Juan de la Cierva-Formación)',
+    place: 'Universidad Complutense de Madrid',
+    note: 'Proyecto «Ciclones: relación con la dinámica atmosférica y el cambio climático».',
+  },
+  {
+    period: 'V·2019 – III·2020',
+    role: 'Investigador postdoctoral',
+    place: 'Universidad de Castilla-La Mancha · Toledo',
+    note: 'Proyecto SOCLIMPACT (Horizonte 2020, UE): impactos del cambio climático y vías de descarbonización en las islas europeas.',
+  },
+  {
+    period: 'VIII·2018 – XI·2018',
+    role: 'Investigador postdoctoral visitante',
+    place: 'ETH Zúrich · Institute for Atmospheric and Climate Science',
+    note: 'Con Heini Wernli.',
+  },
+  {
+    period: 'V·2018 – IV·2019',
+    role: 'Investigador postdoctoral',
+    place: 'Universidad de Castilla-La Mancha · Toledo',
+  },
+  {
+    period: 'IV·2017 – VIII·2017',
+    role: 'Estudiante de doctorado visitante',
+    place: 'Penn State University · Department of Meteorology and Atmospheric Science',
+    note: 'Con Jenni L. Evans.',
+  },
+  {
+    period: 'V·2015 – IV·2018',
+    role: 'Personal investigador en formación',
+    place: 'Universidad de Castilla-La Mancha · Toledo',
+    note: 'Con dos estancias de cuatro meses en Penn State (2016 y 2017).',
+  },
+];
+
+// Títulos de los trabajos en su idioma original (sin traducir).
+const education = [
+  {
+    period: 'X·2014 – IV·2018',
+    degree: 'Doctorado en Física de la Atmósfera',
+    place: 'Universidad Complutense de Madrid',
+    note: 'Tesis: «Cyclones with tropical characteristics over the northeastern Atlantic and Mediterranean sea: analysis in present climate and future projections».',
+  },
+  {
+    period: '2013',
+    degree: 'Máster en Meteorología y Geofísica',
+    place: 'Universidad Complutense de Madrid',
+    note: 'Trabajo de fin de máster: «Characterization and synoptic analysis of subtropical cyclones within the Northeastern Atlantic Ocean».',
+  },
+  {
+    period: '2012',
+    degree: 'Licenciatura en Ciencias Físicas',
+    place: 'Universidad Complutense de Madrid',
+    note: 'Proyecto de fin de carrera: «Meteorological characterization of a subtropical cyclone within the Northeastern Atlantic Ocean».',
+  },
+];
+
+const recognitions = [
+  'Editor asociado del Quarterly Journal of the Royal Meteorological Society.',
+  'Contratos postdoctorales Juan de la Cierva y Ramón y Cajal (Gobierno de España).',
+  'Becas postdoctorales de las Acciones Marie Skłodowska-Curie (UE).',
+];
+
+const scholar = SOCIAL.find((s) => s.name === 'Google Scholar');
+---
+
+  <div class="container narrow">
+    <header class="page-header">
+      <p class="label">Ficha</p>
+      <h1>Sobre mí</h1>
+      <p>{SITE.author}</p>
+    </header>
+
+    <div class="prose">
+      <p>
+        Soy jefe del Servicio de Predicción Climática de la Agencia Estatal de Meteorología (AEMET), coordinador del
+        MedCOF, el foro regional de predicción climática para el Mediterráneo de la Organización Meteorológica
+        Mundial, e investigador. También soy editor asociado del <em>Quarterly Journal of the Royal Meteorological
+        Society</em>.
+      </p>
+      <p>
+        Investigo los extremos meteorológicos y climáticos (olas de calor, tormentas convectivas y ciclones) y la
+        predecibilidad, la variabilidad y el cambio del tiempo y del clima.
+      </p>
+      <p>
+        Me apasiona comunicar y hablar con el público, la industria y los responsables políticos sobre los retos y las
+        oportunidades de la predicción climática y del cambio climático.
+      </p>
+    </div>
+
+    <section aria-labelledby="areas-title">
+      <h2 id="areas-title" class="label section">Áreas de trabajo</h2>
+      <dl class="areas">
+        {
+          areas.map((a) => (
+            <div>
+              <dt>{a.title}</dt>
+              <dd>{a.text}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section aria-labelledby="cv-title">
+      <h2 id="cv-title" class="label section">Trayectoria</h2>
+      <table class="cv">
+        <tbody>
+          {
+            timeline.map((t) => (
+              <tr>
+                <th scope="row" class="mono">{t.period}</th>
+                <td>
+                  <strong>{t.role}</strong>
+                  <span class="place">{t.place}</span>
+                  {t.note && <span class="note">{t.note}</span>}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="edu-title">
+      <h2 id="edu-title" class="label section">Formación</h2>
+      <table class="cv">
+        <tbody>
+          {
+            education.map((e) => (
+              <tr>
+                <th scope="row" class="mono">{e.period}</th>
+                <td>
+                  <strong>{e.degree}</strong>
+                  <span class="place">{e.place}</span>
+                  <span class="note">{e.note}</span>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="rec-title">
+      <h2 id="rec-title" class="label section">Reconocimientos</h2>
+      <ul class="plain">
+        {recognitions.map((r) => <li>{r}</li>)}
+      </ul>
+      {
+        scholar && (
+          <p class="mono scholar">
+            {isVisible('publicaciones') && <><a href="/publicaciones/">Lista de publicaciones →</a> · también en{' '}</>}
+            <a href={scholar.url} rel="noopener" target="_blank">
+              Google Scholar
+            </a>
+          </p>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="where-title">
+      <h2 id="where-title" class="label section">Dónde encontrarme</h2>
+      <table class="cv">
+        <tbody>
+          {
+            SOCIAL.filter((s) => s.url || import.meta.env.DEV).map((s) => (
+              <tr>
+                <th scope="row" class="mono">{s.name}</th>
+                <td>
+                  {s.url ? (
+                    <a href={s.url} rel="me noopener" target="_blank">
+                      {s.handle}
+                    </a>
+                  ) : (
+                    <span class="muted">{s.handle}</span>
+                  )}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <p class="sign" aria-hidden="true"><StationMark size={28} /></p>
+  </div>
+
+<style>
+  .section {
+    color: var(--text);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+    margin: 3rem 0 0;
+  }
+  .areas {
+    margin: 0;
+  }
+  .areas > div {
+    display: grid;
+    grid-template-columns: 15rem 1fr;
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .areas dt {
+    font-weight: 600;
+  }
+  .areas dd {
+    margin: 0;
+    color: var(--text-muted);
+  }
+  @media (max-width: 640px) {
+    .areas > div {
+      grid-template-columns: 1fr;
+    }
+  }
+  .cv {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .cv th,
+  .cv td {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: baseline;
+  }
+  .cv th {
+    width: 11rem;
+    padding-right: 1.5rem;
+    font-weight: 400;
+    font-size: var(--step--1);
+    color: var(--highlight);
+    white-space: nowrap;
+  }
+  .cv strong {
+    display: block;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .place {
+    display: block;
+    color: var(--text-muted);
+  }
+  .note {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.92em;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+  @media (max-width: 640px) {
+    .cv tr {
+      display: block;
+      border-bottom: 1px solid var(--border);
+      padding-block: 0.7rem;
+    }
+    .cv th,
+    .cv td {
+      display: block;
+      width: auto;
+      padding: 0;
+      border: 0;
+    }
+    .cv th {
+      margin-bottom: 0.2rem;
+    }
+  }
+  .plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .plain li {
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .scholar {
+    margin-top: 1rem;
+  }
+  .sign {
+    margin-top: 3rem;
+    color: var(--text-muted);
+  }
+</style>

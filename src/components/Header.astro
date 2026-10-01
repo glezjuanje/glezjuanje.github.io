@@ -1,14 +1,18 @@
 ---
-import { SITE } from '../config/site';
+import { SITE, isVisible, isHiddenInProd, type Section } from '../config/site';
 import StationMark from './StationMark.astro';
 import ThemeToggle from './ThemeToggle.astro';
 
-const nav = [
-  { href: '/blog/', label: 'Blog' },
+const allNav: { href: string; label: string; section?: Section }[] = [
+  { href: '/blog/', label: 'Blog', section: 'blog' },
   { href: '/sobre-mi/', label: 'Sobre mí' },
-  { href: '/publicaciones/', label: 'Publicaciones' },
-  { href: '/contacto/', label: 'Contacto' },
+  { href: '/publicaciones/', label: 'Publicaciones', section: 'publicaciones' },
+  { href: '/contacto/', label: 'Contacto', section: 'contacto' },
 ];
+// En producción solo las secciones publicadas; en desarrollo, todas (las ocultas, marcadas).
+const nav = allNav
+  .filter((item) => !item.section || isVisible(item.section))
+  .map((item) => ({ ...item, hidden: import.meta.env.DEV && !!item.section && isHiddenInProd(item.section) }));
 
 const path = Astro.url.pathname.replace(/\/?$/, '/');
 const isActive = (href: string) => path.startsWith(href);
@@ -30,8 +34,14 @@ const isActive = (href: string) => path.startsWith(href);
           {
             nav.map((item) => (
               <li>
-                <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+                <a
+                  href={item.href}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  class:list={{ 'is-hidden': item.hidden }}
+                  title={item.hidden ? 'Oculta en la web publicada (src/config/sections.mjs)' : undefined}
+                >
                   {item.label}
+                  {item.hidden && <small> · oculta</small>}
                 </a>
               </li>
             ))
@@ -101,6 +111,15 @@ const isActive = (href: string) => path.startsWith(href);
   }
   nav a:hover {
     border-bottom-color: currentColor;
+  }
+  nav a.is-hidden {
+    opacity: 0.55;
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+  }
+  nav a.is-hidden small {
+    font-size: 0.75em;
+    text-transform: none;
   }
   nav a[aria-current='page'] {
     color: var(--highlight);

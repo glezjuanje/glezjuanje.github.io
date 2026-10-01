@@ -1,5 +1,5 @@
 ---
-import { SITE, SOCIAL } from '../config/site';
+import { SITE, SOCIAL, isVisible } from '../config/site';
 import StationMark from './StationMark.astro';
 const year = new Date().getFullYear();
 const social = SOCIAL.filter((s) => s.url);
@@ -16,8 +16,8 @@ const social = SOCIAL.filter((s) => s.url);
       </p>
       <nav aria-label="Pie de página">
         <ul>
-          <li><a href="/rss.xml">RSS</a></li>
-          <li><a href="/contacto/">Contacto</a></li>
+          {isVisible('blog') && <li><a href="/rss.xml">RSS</a></li>}
+          {isVisible('contacto') && <li><a href="/contacto/">Contacto</a></li>}
           {
             social.map((s) => (
               <li>

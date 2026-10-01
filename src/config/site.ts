@@ -1,5 +1,7 @@
 // Configuración central del sitio. Todo lo marcado [PENDIENTE] debe rellenarse.
 
+import { PUBLIC_SECTIONS } from './sections.mjs';
+
 export const SITE = {
   name: 'Juanje',
   title: 'Juanje · Meteorología y clima',
@@ -65,3 +67,8 @@ export const ADS = {
 };
 
 export const adsEnabled = import.meta.env.PROD && ADS.client !== '';
+
+// Secciones publicadas (ver src/config/sections.mjs). En desarrollo, todo visible.
+export type Section = keyof typeof PUBLIC_SECTIONS;
+export const isVisible = (section: Section) => import.meta.env.DEV || PUBLIC_SECTIONS[section];
+export const isHiddenInProd = (section: Section) => !PUBLIC_SECTIONS[section];

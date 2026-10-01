@@ -12,7 +12,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AdSenseLoader from '../components/AdSenseLoader.astro';
 import DesignSwitcher from '../components/DesignSwitcher.astro';
-import { SITE } from '../config/site';
+import { SITE, isVisible } from '../config/site';
 
 export type Props = SEOProps;
 const isDev = import.meta.env.DEV;
@@ -25,7 +25,7 @@ const isDev = import.meta.env.DEV;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title={SITE.title} href={new URL('/rss.xml', Astro.site)} />
+    {isVisible('blog') && <link rel="alternate" type="application/rss+xml" title={SITE.title} href={new URL('/rss.xml', Astro.site)} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#f3f0e8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />

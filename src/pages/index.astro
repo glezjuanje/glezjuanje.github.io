@@ -3,13 +3,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PostRow from '../components/PostRow.astro';
 import Isobars from '../components/Isobars.astro';
 import FrontGlyph from '../components/FrontGlyph.astro';
-import { CATEGORIES, SITE } from '../config/site';
+import About from '../components/About.astro';
+import { CATEGORIES, SITE, isVisible } from '../config/site';
 import { categoryUrl, getPostNumbers, getPosts } from '../utils/posts';
 
+// Mientras el blog no sea público, la portada muestra la ficha de «Sobre mí».
+const showBlog = isVisible('blog');
 const latest = (await getPosts()).slice(0, SITE.latestOnHome);
 const numbers = await getPostNumbers();
 ---
 
+{
+  !showBlog && (
+    <BaseLayout
+      description="Juan Jesús González Alemán (Juanje): jefe del Servicio de Predicción Climática de AEMET, coordinador del MedCOF e investigador."
+      type="profile"
+    >
+      <About />
+    </BaseLayout>
+  )
+}
+
+{showBlog && (
 <BaseLayout>
   <section class="intro">
     <Isobars />
@@ -53,6 +68,7 @@ const numbers = await getPostNumbers();
     </aside>
   </div>
 </BaseLayout>
+)}
 
 <style>
   .intro {

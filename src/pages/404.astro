@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostRow from '../components/PostRow.astro';
+import { isVisible } from '../config/site';
 import { getPostNumbers, getPosts } from '../utils/posts';
 
-const latest = (await getPosts()).slice(0, 3);
+const showBlog = isVisible('blog');
+const latest = showBlog ? (await getPosts()).slice(0, 3) : [];
 const numbers = await getPostNumbers();
 ---
 
@@ -13,12 +15,22 @@ const numbers = await getPostNumbers();
       <p class="label">Error 404 · sin datos</p>
       <h1>Página no encontrada</h1>
       <p>La dirección no existe o ha cambiado.</p>
-      <p class="links mono"><a href="/">Portada</a> · <a href="/blog/">Archivo del blog</a></p>
+      <p class="links mono">
+        <a href="/">Portada</a>{showBlog && <> · <a href="/blog/">Archivo del blog</a></>}
+      </p>
     </header>
-    <h2 class="label sub">Últimas entradas</h2>
-    <ol class="log">
-      {latest.map((post) => <PostRow post={post} number={numbers.get(post.id)} showDescription={false} headingLevel="h3" />)}
-    </ol>
+    {
+      showBlog && (
+        <>
+          <h2 class="label sub">Últimas entradas</h2>
+          <ol class="log">
+            {latest.map((post) => (
+              <PostRow post={post} number={numbers.get(post.id)} showDescription={false} headingLevel="h3" />
+            ))}
+          </ol>
+        </>
+      )
+    }
   </div>
 </BaseLayout>
 
