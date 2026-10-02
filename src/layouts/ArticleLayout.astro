@@ -8,7 +8,7 @@ import AdSlot from '../components/AdSlot.astro';
 import FrontGlyph from '../components/FrontGlyph.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import VisitCount from '../components/VisitCount.astro';
-import { SITE, analyticsEnabled } from '../config/site';
+import { SITE, showVisitCounts } from '../config/site';
 import { categoryUrl, formatDate, formatShortDate, getPostNumbers, readingMinutes, tagUrl, type Post } from '../utils/posts';
 
 export interface Props {
@@ -61,7 +61,7 @@ const ogImage = cover ? (await getImage({ src: cover, width: 1200, format: 'jpg'
           <dd>{minutes} min</dd>
         </div>
         {
-          (analyticsEnabled || import.meta.env.DEV) && (
+          showVisitCounts && (
             <div>
               <dt>Visitas</dt>
               <dd><VisitCount path={Astro.url.pathname} /></dd>

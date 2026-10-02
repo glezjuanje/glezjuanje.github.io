@@ -82,6 +82,10 @@ export const ANALYTICS = {
   endpoint: goatcounterCode ? `https://${goatcounterCode}.goatcounter.com` : '',
 };
 export const analyticsEnabled = import.meta.env.PROD && ANALYTICS.endpoint !== '';
+// Mostrar el número de visitas en la web (ficha del artículo y pie). Con `false`
+// se siguen registrando, pero solo se ven en el panel privado de GoatCounter.
+export const SHOW_VISIT_COUNTS = false;
+export const showVisitCounts = SHOW_VISIT_COUNTS && (analyticsEnabled || import.meta.env.DEV);
 
 // Secciones publicadas (ver src/config/sections.mjs). En desarrollo, todo visible.
 export type Section = keyof typeof PUBLIC_SECTIONS;

@@ -1,5 +1,5 @@
 ---
-import { SITE, SOCIAL, analyticsEnabled, isVisible } from '../config/site';
+import { SITE, SOCIAL, isVisible, showVisitCounts } from '../config/site';
 import StationMark from './StationMark.astro';
 import VisitCount from './VisitCount.astro';
 const year = new Date().getFullYear();
@@ -15,7 +15,7 @@ const social = SOCIAL.filter((s) => s.url);
         <span>{SITE.author}</span>
         <span class="muted">© {year}</span>
         {
-          (analyticsEnabled || import.meta.env.DEV) && (
+          showVisitCounts && (
             <span class="muted">
               · <VisitCount path="TOTAL" /> visitas
             </span>
