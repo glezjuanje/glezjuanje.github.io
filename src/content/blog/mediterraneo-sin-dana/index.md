@@ -1,14 +1,14 @@
 ---
 title: 'Tormentas de alto impacto sin una gran DANA'
 date: 2026-10-02
+number: 4
 description: 'Un Mediterráneo con temperaturas de récord reduce el forzamiento necesario para que una situación discreta acabe en lluvias torrenciales'
 category: Actualidad meteo
 tags: [Mediterráneo, tormentas, temperatura del mar, ola de calor marina, lluvias torrenciales]
 draft: false
 ---
 
-import FigurePending from '../../../components/FigurePending.astro';
-
+<!-- Generado por `npm run publicar` desde articulos/. Edita el original, no este archivo. -->
 Durante las últimas semanas, la vertiente mediterránea ha sufrido varios episodios de tormentas de alto impacto. El más reciente, entre el 1 y el 2 de octubre, llevó a AEMET a activar el aviso rojo en el litoral de Castellón, Valencia y Tarragona. Se registraron unos 145 l/m² en Alcalà de Xivert y más de 125 l/m² en Cabanes, Peñíscola o Polinyà del Xúquer, con inundaciones repentinas y clases suspendidas para más de 300.000 alumnos.
 
 Lo que más me llama la atención es la configuración atmosférica. Normalmente asociamos este tipo de episodios a una DANA o a una vaguada profunda, que aportan aire frío en altura y un fuerte forzamiento dinámico. Esta vez, como en otros episodios de septiembre, el forzamiento ha sido bastante más modesto: un frente atlántico y una vaguada poco profunda, junto con vientos de componente marítima. Y aun así, las tormentas han sido muy eficientes descargando agua.
@@ -17,7 +17,8 @@ Lo que más me llama la atención es la configuración atmosférica. Normalmente
 
 Mi hipótesis es que el factor diferencial está en el propio Mediterráneo. Este verano ha batido todos los registros: según AEMET, la temperatura superficial media del conjunto del mar alcanzó 28,54 °C el 13 de agosto, el valor más alto desde al menos 1940, y en Baleares se llegaron a medir más de 33 °C. A mediados de septiembre la media seguía en 27,2 °C, más de 2 °C por encima de lo normal, con anomalías de hasta +5 °C en el Mediterráneo central.
 
-<FigurePending>Anomalía de temperatura superficial del Mediterráneo.</FigurePending> 
+<!-- Figura 4.1 pendiente: Anomalía de temperatura superficial del Mediterráneo. -->
+
 ## Por qué importa tanto la temperatura del mar
 
 Un mar más cálido evapora más agua y calienta desde abajo el aire de los niveles bajos. Además, por la relación de Clausius-Clapeyron, cada grado adicional permite que el aire contenga en torno a un 7 % más de vapor de agua. Es decir, el aire que llega a la costa desde el mar lo hace más cálido y húmedo, con más energía disponible para la convección (CAPE) y con una base de nube más baja.

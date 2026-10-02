@@ -2,11 +2,11 @@
 
 ## La misma vaguada que lo arrastró hacia el norte acabó desorganizando la tormenta en menos de dos días
 
-Hace unos días te contaba la formación de la tormenta tropical Gonzalo al este de Cabo Verde, con sus bandas nubosas alcanzando Canarias en su camino hacia el norte. Ya entonces el Centro Nacional de Huracanes de EE. UU. (NHC) anticipaba que el ambiente se volvería desfavorable. Lo que ha llamado la atención es la rapidez con la que ha ocurrido.
+Hace unos días [te contaba la formación de la tormenta tropical Gonzalo](/blog/gonzalo-hacia-el-norte/) al este de Cabo Verde, con sus bandas nubosas alcanzando Canarias en su camino hacia el norte. Ya entonces el Centro Nacional de Huracanes de EE. UU. (NHC) anticipaba que el ambiente se volvería desfavorable. Lo que ha llamado la atención es la rapidez con la que ha ocurrido.
 
 Gonzalo alcanzó su máxima intensidad el 25 de septiembre, con vientos sostenidos de 45 nudos (unos 83 km/h). El sábado 26 por la tarde, apenas un día y medio después, el NHC emitía su último aviso y lo declaraba ciclón postropical. Las primeras discusiones situaban la pérdida de la convección profunda entre el 27 y el 28 de septiembre.
 
-[Figura: secuencia de imágenes de satélite de Gonzalo entre el 25 y el 26 de septiembre]
+[Figura 2.1: Secuencia de imágenes de satélite de Gonzalo entre el 25 y el 26 de septiembre.]
 
 ## Una cizalladura muy intensa
 
@@ -28,7 +28,7 @@ Me parece interesante señalar que la vaguada profunda en niveles medios que emp
 
 Algo parecido le ocurrió a Hermine en 2022, que se debilitó por la cizalladura mientras subía hacia Canarias. Es lo que cabría esperar en los ciclones que se forman tan al este y toman rumbo norte: para subir necesitan una vaguada, y esa vaguada suele traer consigo la cizalladura.
 
-Esto matiza la cuestión que planteaba en el artículo anterior. Un océano más cálido amplía la zona donde estos sistemas pueden formarse y mantenerse, pero la dinámica de latitudes medias sigue siendo un freno muy eficaz. Para que uno de ellos llegue a nuestras costas con intensidad tienen que coincidir aguas cálidas en su recorrido y una cizalladura moderada. Es poco frecuente, aunque no imposible: Delta en 2005 y Leslie en 2018 alcanzaron Canarias y Portugal, respectivamente, con vientos muy intensos, aunque ya en plena transición extratropical.
+Esto matiza la cuestión que planteaba en [el artículo anterior](/blog/gonzalo-hacia-el-norte/). Un océano más cálido amplía la zona donde estos sistemas pueden formarse y mantenerse, pero la dinámica de latitudes medias sigue siendo un freno muy eficaz. Para que uno de ellos llegue a nuestras costas con intensidad tienen que coincidir aguas cálidas en su recorrido y una cizalladura moderada. Es poco frecuente, aunque no imposible: Delta en 2005 y Leslie en 2018 alcanzaron Canarias y Portugal, respectivamente, con vientos muy intensos, aunque ya en plena transición extratropical.
 
 ## Una nota sobre los modelos
 

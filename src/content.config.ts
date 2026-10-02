@@ -9,6 +9,8 @@ const blog = defineCollection({
     z.object({
       title: z.string(),
       date: z.coerce.date(),
+      // Nº del artículo (del nombre del archivo en articulos/). Si falta, se numera por fecha.
+      number: z.number().int().positive().optional(),
       updated: z.coerce.date().optional(),
       description: z.string().max(200),
       category: z.enum(CATEGORY_NAMES),

@@ -4,7 +4,7 @@
 
 Esta semana nos ha dejado una imagen de satélite espectacular: la tormenta tropical Gonzalo, ya formada al este de Cabo Verde, con una de sus bandas nubosas (indirectas) llegando hasta Canarias en su camino hacia el norte.
 
-[Figura: imagen de satélite de Gonzalo con realce infrarrojo]
+[Figura 1.1: Imagen de satélite de Gonzalo con realce infrarrojo.]
 
 En los tonos rojos, negros y grises se aprecian las tormentas más intensas asociadas al sistema, con topes nubosos muy fríos que indican corrientes ascendentes muy vigorosas. Se están alimentando de unas temperaturas del mar más cálidas de lo normal para la zona.
 

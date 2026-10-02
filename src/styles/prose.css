@@ -109,6 +109,13 @@
   letter-spacing: 0.05em;
   color: var(--highlight);
 }
+/* Figuras con número propio (Figura4.1.png → «FIG. 4.1»). */
+.prose .fig figcaption[data-fig]::before {
+  content: 'FIG. ' attr(data-fig) ' — ';
+}
+.prose .fig figcaption[data-fig].no-text::before {
+  content: 'FIG. ' attr(data-fig);
+}
 .prose .fig .credit {
   display: block;
   margin-top: 0.3em;

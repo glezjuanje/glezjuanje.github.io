@@ -1,12 +1,19 @@
-# Gonzalo en el registro histórico
+---
+title: 'Gonzalo en el registro histórico'
+date: 2026-09-27
+number: 3
+description: 'De casi un centenar de ciclones formados junto a la costa africana desde 1851, apenas seis subieron hacia el norte manteniéndose como tormenta tropical'
+category: Clima
+tags: [Gonzalo, ciclones tropicales, HURDAT2, Hermine, climatología]
+draft: false
+---
 
-## De casi un centenar de ciclones formados junto a la costa africana desde 1851, apenas seis subieron hacia el norte manteniéndose como tormenta tropical
-
-En los dos artículos anteriores te contaba la formación de la tormenta tropical Gonzalo al este de Cabo Verde y los motivos por los que se desorganizó tan rápido. Queda una pregunta pendiente: ¿hasta qué punto ha sido un caso anómalo?
+<!-- Generado por `npm run publicar` desde articulos/. Edita el original, no este archivo. -->
+En los dos artículos anteriores te contaba [la formación de la tormenta tropical Gonzalo](/blog/gonzalo-hacia-el-norte/) al este de Cabo Verde y [los motivos por los que se desorganizó tan rápido](/blog/por-que-gonzalo-duro-tan-poco/). Queda una pregunta pendiente: ¿hasta qué punto ha sido un caso anómalo?
 
 Para responderla he consultado HURDAT2, la base de datos de trayectorias de ciclones del Atlántico que mantiene el NHC, con registros desde 1851.
 
-[Figura: trayectorias históricas de HURDAT que atraviesan la zona entre Cabo Verde y la costa africana (NOAA Historical Hurricane Tracks)]
+<!-- Figura 3.1 pendiente: Trayectorias históricas de HURDAT que atraviesan la zona entre Cabo Verde y la costa africana (NOAA Historical Hurricane Tracks). -->
 
 ## La mayoría se va hacia el oeste
 

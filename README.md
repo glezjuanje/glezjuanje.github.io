@@ -13,33 +13,39 @@ Web personal y blog de Juanje (Astro 7, sitio estático).
 
 ## Escribir un artículo
 
-Cada artículo es una carpeta dentro de `src/content/blog/` con su texto (`index.md`) y sus imágenes. El nombre de la carpeta es la URL:
+Los artículos se escriben en `articulos/`, con sus figuras al lado:
 
 ```
-src/content/blog/
-└─ gonzalo-hacia-el-norte/     →  /blog/gonzalo-hacia-el-norte/
-   ├─ index.md
-   ├─ satelite.jpg
-   └─ trayectoria.png
+articulos/
+├─ 004-2026-10-02-mediterraneo-sin-dana.md   →  Nº 004 · 02·X·2026 · /blog/mediterraneo-sin-dana/
+├─ Figura4.1.png                              →  figura 1 del artículo 4
+└─ Figura4.2.jpg
 ```
 
-1. Copia `plantillas/articulo/` a `src/content/blog/` y renombra la carpeta.
-2. Rellena la cabecera (título, fecha, entradilla, categoría, etiquetas) y escribe.
-3. Para una figura, pon la imagen en la carpeta y escribe en una línea aparte:
+1. Copia `plantillas/005-AAAA-MM-DD-nombre-del-articulo.md` a `articulos/` y renómbralo: **Nº-fecha-nombre.md**. El nombre (en minúsculas, sin tildes, con guiones) es la URL.
+2. Escribe: `#` título, `##` entradilla y, si quieres, las líneas `Categoría:`, `Etiquetas:` y `Borrador: sí`.
+3. Figuras: guarda la imagen como `Figura<Nº artículo>.<Nº figura>` (p. ej. `Figura4.1.png`) y marca su sitio en el texto, en una línea aparte:
 
    ```md
-   ![Descripción de la imagen](satelite.jpg "Pie de figura, se numera solo.")
+   [Figura 4.1: Pie de la figura.]
    ```
 
-   En **Typora**, **Obsidian** o **VS Code** puedes pegar la imagen con Ctrl+V y el editor guarda el archivo y escribe esa línea por ti (en Typora: *Preferencias → Imagen → Copiar imagen a la carpeta actual `./`*).
-4. Con `draft: true` solo se ve en `npm run dev`; cámbialo a `false` para publicar.
+   En la web aparece como «FIG. 4.1 — Pie de la figura.». Sin pie: `[Figura 4.1]`.
+4. Ejecuta:
+
+   ```
+   npm run publicar
+   ```
+
+   Genera las entradas en `src/content/blog/` y avisa de lo que falte (imágenes, categoría…). Revisa en `npm run dev`, haz commit y push.
 
 Más detalles:
 
+- No edites `src/content/blog/<artículo>/index.md`: se regenera desde `articulos/`.
+- Si un artículo ya publicado no indica `Categoría:` o `Etiquetas:`, se conservan las que tenía.
 - Fórmulas en LaTeX: `$e_s(T)$` en línea o entre `$$ … $$` en bloque.
 - Las imágenes se optimizan solas (WebP, tamaño adecuado).
 - El anuncio intermedio se inserta solo tras el 3.er párrafo si hay 5 o más.
-- También se admiten artículos `.mdx` (Markdown con componentes); en ellos se puede colocar el anuncio a mano con `<AdSlot />`.
 
 ## Publicaciones
 

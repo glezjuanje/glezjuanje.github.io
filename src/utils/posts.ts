@@ -7,7 +7,9 @@ export type Post = CollectionEntry<'blog'>;
 /** Artículos publicados, del más reciente al más antiguo. En desarrollo se ven también los borradores. */
 export async function getPosts(): Promise<Post[]> {
   const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft);
-  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf() || (b.data.number ?? 0) - (a.data.number ?? 0),
+  );
 }
 
 export function slugify(text: string): string {
@@ -77,10 +79,14 @@ export const formatShortDate = (d: Date) =>
   `${String(d.getUTCDate()).padStart(2, '0')}·${ROMAN_MONTHS[d.getUTCMonth()]}·${d.getUTCFullYear()}`;
 
 /**
- * Número de boletín de cada artículo publicado, en orden cronológico (el
- * primero es el Nº 001). Los borradores no tienen número.
+ * Número de cada artículo: el de su archivo en articulos/ (campo `number`) o,
+ * si no lo tiene, su posición en orden cronológico. Los borradores sin número
+ * no tienen número.
  */
 export async function getPostNumbers(): Promise<Map<string, string>> {
+  const pad = (n: number) => String(n).padStart(3, '0');
   const published = (await getPosts()).filter((p) => !p.data.draft).reverse();
-  return new Map(published.map((p, i) => [p.id, String(i + 1).padStart(3, '0')]));
+  const map = new Map(published.map((p, i) => [p.id, pad(p.data.number ?? i + 1)]));
+  for (const p of await getPosts()) if (p.data.number) map.set(p.id, pad(p.data.number));
+  return map;
 }

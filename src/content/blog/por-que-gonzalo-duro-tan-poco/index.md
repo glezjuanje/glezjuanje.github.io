@@ -1,19 +1,19 @@
 ---
 title: 'Por qué Gonzalo duró tan poco'
-date: 2026-09-27T09:00:00Z
+date: 2026-09-27
+number: 2
 description: 'La misma vaguada que lo arrastró hacia el norte acabó desorganizando la tormenta en menos de dos días'
 category: Actualidad meteo
 tags: [Gonzalo, ciclones tropicales, cizalladura, Hermine, predicción]
 draft: false
 ---
 
-import FigurePending from '../../../components/FigurePending.astro';
-
+<!-- Generado por `npm run publicar` desde articulos/. Edita el original, no este archivo. -->
 Hace unos días [te contaba la formación de la tormenta tropical Gonzalo](/blog/gonzalo-hacia-el-norte/) al este de Cabo Verde, con sus bandas nubosas alcanzando Canarias en su camino hacia el norte. Ya entonces el Centro Nacional de Huracanes de EE. UU. (NHC) anticipaba que el ambiente se volvería desfavorable. Lo que ha llamado la atención es la rapidez con la que ha ocurrido.
 
 Gonzalo alcanzó su máxima intensidad el 25 de septiembre, con vientos sostenidos de 45 nudos (unos 83 km/h). El sábado 26 por la tarde, apenas un día y medio después, el NHC emitía su último aviso y lo declaraba ciclón postropical. Las primeras discusiones situaban la pérdida de la convección profunda entre el 27 y el 28 de septiembre.
 
-<FigurePending>Secuencia de imágenes de satélite de Gonzalo entre el 25 y el 26 de septiembre.</FigurePending>
+<!-- Figura 2.1 pendiente: Secuencia de imágenes de satélite de Gonzalo entre el 25 y el 26 de septiembre. -->
 
 ## Una cizalladura muy intensa
 

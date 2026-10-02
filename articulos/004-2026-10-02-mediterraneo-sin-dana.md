@@ -10,7 +10,7 @@ Lo que más me llama la atención es la configuración atmosférica. Normalmente
 
 Mi hipótesis es que el factor diferencial está en el propio Mediterráneo. Este verano ha batido todos los registros: según AEMET, la temperatura superficial media del conjunto del mar alcanzó 28,54 °C el 13 de agosto, el valor más alto desde al menos 1940, y en Baleares se llegaron a medir más de 33 °C. A mediados de septiembre la media seguía en 27,2 °C, más de 2 °C por encima de lo normal, con anomalías de hasta +5 °C en el Mediterráneo central.
 
-[Figura: anomalía de temperatura superficial del Mediterráneo]
+[Figura 4.1: Anomalía de temperatura superficial del Mediterráneo.]
 
 ## Por qué importa tanto la temperatura del mar
 

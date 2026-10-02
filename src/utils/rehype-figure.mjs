@@ -10,9 +10,18 @@
 
 const isWhitespace = (n) => n.type === 'text' && !n.value.trim();
 
+// Archivos «Figura4.1.png» → «4.1»: la figura muestra ese número en el pie.
+const FIG_FILE = /figura\s*[_-]?(\d+)[._-](\d+)\.[a-z0-9]+$/i;
+
 function imageInfo(node) {
   if (node.type === 'element' && node.tagName === 'img') {
-    return { alt: node.properties?.alt ?? '', title: node.properties?.title ?? '', clearTitle: () => delete node.properties.title };
+    const m = String(node.properties?.src ?? '').match(FIG_FILE);
+    return {
+      alt: node.properties?.alt ?? '',
+      title: node.properties?.title ?? '',
+      figNumber: m ? `${Number(m[1])}.${Number(m[2])}` : '',
+      clearTitle: () => delete node.properties.title,
+    };
   }
   if ((node.type === 'mdxJsxTextElement' || node.type === 'mdxJsxFlowElement') && /image|img/i.test(node.name ?? '')) {
     const attr = (name) => node.attributes?.find((a) => a.name === name);
@@ -33,16 +42,20 @@ function transform(parent) {
       const content = child.children.filter((n) => !isWhitespace(n));
       const info = content.length === 1 ? imageInfo(content[0]) : null;
       if (info) {
-        const caption = info.title || info.alt;
+        // Figuras numeradas (Figura4.1.png): el pie es solo el título; sin título, solo «FIG. 4.1».
+        const caption = info.figNumber ? info.title : info.title || info.alt;
         info.clearTitle();
+        const numProps = info.figNumber ? { dataFig: info.figNumber } : {};
+        const figcaption = caption
+          ? { type: 'element', tagName: 'figcaption', properties: numProps, children: [{ type: 'text', value: caption }] }
+          : info.figNumber
+            ? { type: 'element', tagName: 'figcaption', properties: { ...numProps, className: ['no-text'] }, children: [] }
+            : null;
         return {
           type: 'element',
           tagName: 'figure',
-          properties: { className: ['fig'] },
-          children: [
-            content[0],
-            ...(caption ? [{ type: 'element', tagName: 'figcaption', properties: {}, children: [{ type: 'text', value: caption }] }] : []),
-          ],
+          properties: { className: ['fig'], ...(info.figNumber ? { dataFig: info.figNumber } : {}) },
+          children: [content[0], ...(figcaption ? [figcaption] : [])],
         };
       }
     }
