@@ -45,4 +45,3 @@ Datos: HURDAT2 (1851-2023). Se consideran los ciclones cuyo primer registro como
 - NHC, base de datos HURDAT2: https://www.nhc.noaa.gov/data/#hurdat
 - NOAA, Historical Hurricane Tracks: https://coast.noaa.gov/hurricanes/
 - NHC, discusión n.º 8, ciclón postropical Gonzalo (26 sep 2026): https://capeweather.com/post-tropical-cyclone-gonzalo-forecast-discussion-number-8/
-- Landsea, C. W. y Franklin, J. L. (2013). Atlantic hurricane database uncertainty and presentation of a new database format. *Monthly Weather Review*, 141, 3576–3592.

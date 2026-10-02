@@ -34,7 +34,7 @@ Es un tema en el que llevo trabajando desde 2010. De hecho, mi tesis doctoral tr
 
 ## Qué dice la ciencia
 
-Hay motivos físicos para pensar que este tipo de episodios podrían ser más frecuentes. Con el calentamiento global, la región del Atlántico oriental con aguas lo bastante cálidas para sostener ciclones tropicales tiende a extenderse hacia el este y hacia el norte. Haarsma et al. (2013) ya proyectaban un aumento de los ciclones de origen tropical que alcanzan Europa occidental con vientos de temporal, debido a esa expansión.
+Hay motivos físicos para pensar que este tipo de episodios podrían ser más frecuentes. Con el calentamiento global, la región del Atlántico oriental con aguas lo bastante cálidas para sostener ciclones tropicales tiende a extenderse hacia el este y hacia el norte. Existe literatura científica que apunta en esa dirección.
 
 Con esto no quiero decir que Gonzalo se deba al cambio climático. Ciclones con trayectorias poco habituales siempre ha habido. Pero el océano sobre el que se desarrollan es ahora más cálido, y eso puede permitirles mantenerse durante más tiempo y a mayores latitudes.
 
@@ -47,4 +47,3 @@ Habrá que estudiarlo con rigor, pero son casos que encajan con lo que venimos o
 - NHC, discusión de pronóstico n.º 2 de la tormenta tropical Gonzalo (25 sep 2026): https://capeweather.com/tropical-storm-gonzalo-forecast-discussion-number-2/
 - Boletín del NHC sobre la formación de Gonzalo: https://www.news4jax.com/weather/hurricane/2026/09/25/tropical-storm-gonzalo-forms-south-southeast-of-the-cabo-verde-islands/
 - Tormenta tropical Hermine (2022): https://es.wikipedia.org/wiki/Tormenta_tropical_Hermine_(2022)
-- Haarsma, R. J. et al. (2013). More hurricanes to hit western Europe due to global warming. *Geophysical Research Letters*, 40, 1783–1788.
