@@ -4,13 +4,15 @@
 
 Durante las últimas semanas, la vertiente mediterránea ha sufrido varios episodios de tormentas de alto impacto. El más reciente, entre el 1 y el 2 de octubre, llevó a AEMET a activar el aviso rojo en el litoral de Castellón, Valencia y Tarragona. Se registraron unos 145 l/m² en Alcalà de Xivert y más de 125 l/m² en Cabanes, Peñíscola o Polinyà del Xúquer, con inundaciones repentinas y clases suspendidas para más de 300.000 alumnos.
 
+[Figura 4.1: Imagen de satélite mostrando las tormentas convectivas. Fuente: Kachelmann/weather.us; datos de EUMETSAT.]
+
 Lo que más me llama la atención es la configuración atmosférica. Normalmente asociamos este tipo de episodios a una DANA o a una vaguada profunda, que aportan aire frío en altura y un fuerte forzamiento dinámico. Esta vez, como en otros episodios de septiembre, el forzamiento ha sido bastante más modesto: un frente atlántico y una vaguada poco profunda, junto con vientos de componente marítima. Y aun así, las tormentas han sido muy eficientes descargando agua.
 
 ## Un mar fuera de escala
 
 Mi hipótesis es que el factor diferencial está en el propio Mediterráneo. Este verano ha batido todos los registros: según AEMET, la temperatura superficial media del conjunto del mar alcanzó 28,54 °C el 13 de agosto, el valor más alto desde al menos 1940, y en Baleares se llegaron a medir más de 33 °C. A mediados de septiembre la media seguía en 27,2 °C, más de 2 °C por encima de lo normal, con anomalías de hasta +5 °C en el Mediterráneo central.
 
-[Figura 4.1: Anomalía de temperatura superficial del Mediterráneo.]
+[Figura 4.2: Olas de calor marina en el Mediterráneo. Fuente: CEAM.]
 
 ## Por qué importa tanto la temperatura del mar
 
