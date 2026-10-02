@@ -73,10 +73,11 @@ export const ADS = {
 
 export const adsEnabled = import.meta.env.PROD && ADS.client !== '';
 
-// Estadísticas de visitas con GoatCounter (sin cookies). Desactivado mientras
-// PUBLIC_GOATCOUNTER_CODE esté vacío. El código es el subdominio de tu cuenta:
-// si tu panel es https://juanje.goatcounter.com, el código es «juanje».
-const goatcounterCode = (import.meta.env.PUBLIC_GOATCOUNTER_CODE ?? '').trim();
+// Estadísticas de visitas con GoatCounter (sin cookies). Panel:
+// https://glezjuanje.goatcounter.com. El código no es secreto (va en la web).
+// Para desactivarlo, deja GOATCOUNTER_CODE vacío ('').
+const GOATCOUNTER_CODE = 'glezjuanje';
+const goatcounterCode = ((import.meta.env.PUBLIC_GOATCOUNTER_CODE ?? '').trim() || GOATCOUNTER_CODE).trim();
 export const ANALYTICS = {
   endpoint: goatcounterCode ? `https://${goatcounterCode}.goatcounter.com` : '',
 };
